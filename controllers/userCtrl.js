@@ -1,15 +1,20 @@
-import userModel from "../models/userModel"
+import userModel from "../models/userModel.js"
 import bcrypt from "bcryptjs";
 
 //register callback
 const registerController= async(req, res)=>{
     try {
-        const existinUser= await userModel.findOne({email:req.body.email})
-        if(existinUser){
+        const existingUser= await userModel.findOne({email:req.body.email})
+        if(existingUser){
             return res.status(200).send({message:'User already exist', success:false})
         }
         const password= req.body.password;
         const confirmPassword= req.body.confirmPassword; 
+
+        //if password not matches
+        if(password!==confirmPassword){
+            return res.status(200).send({message:'Confirm Password not matchs', success:false})
+        }
 
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, salt);
@@ -26,10 +31,18 @@ const registerController= async(req, res)=>{
         console.log(error);
         res.status(500).send({success:false, message:`Register controller ${error.message}`})
     }
+};
+
+
+const loginController = async(req, res) =>{
+    try {
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({message:`Error in login CTRL ${error.message}`})
+    }
 }
 
-const loginController = () =>{}
 
 
-
-module.exports= {loginController, registerController};
+export {loginController, registerController};

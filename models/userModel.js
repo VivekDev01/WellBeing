@@ -14,12 +14,12 @@ const userSchema = new mongoose.Schema({
         required:[true, "password is required"]
     },
     confirmPassword:{
-        tyep:String,
+        type:String,
         required:[true, "Confirm your password"]
-    }
+    },
 });
 
 const userModel = mongoose.model('user', userSchema);
 
-module.exports = userModel;
+export default userModel;
 

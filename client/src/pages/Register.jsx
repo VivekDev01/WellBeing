@@ -13,7 +13,7 @@ const Register = () => {
 
   const onFinishHandler= async (values) =>{
     try {
-      const res = await axios.post('/api/v1/user/register', values);
+      const res = await axios.post("/api/v1/user/register", values);
       if(res.data.success){
         message.success('Registered Seccesfully')
         navigate('/login');
@@ -41,7 +41,7 @@ const Register = () => {
               <Form.Item label="Password" name="password">
                 <Input type="password" required/>
               </Form.Item>
-              <Form.Item label="Confirm Password" name="cnf-password">
+              <Form.Item label="Confirm Password" name="confirmPassword">
                 <Input type="password" required/>
               </Form.Item>
 

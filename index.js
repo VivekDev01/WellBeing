@@ -1,10 +1,14 @@
 import express from "express";
-import Colors from "colors";
+import colors from "colors";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import connectDB from "./config/db.js";
 
 //dotenv config
 dotenv.config();
+
+//mongodb connection
+connectDB();
 
 //rest object
 const app=express();
@@ -14,11 +18,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 //routes
-app.get('/', (req, res)=>{
-    res.status(200).send({
-        Message:"server is running",
-    });
-});
+app.use("/api/v1/user", import("./routes/userRoutes.js"));
 
 //listen port
 const port=process.env.PORT || 4000

@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Children } from 'react'
 
-const Layout = () => {
+const Layout = ({children}) => {
   return (
     <>
         <div className="main">
@@ -11,7 +11,7 @@ const Layout = () => {
                 </div>
                 <div className="content">
                     <div className="header">Header</div>
-                    <div className="body">Body</div>
+                    <div className="body">{children}</div>
                 </div>
             </div>
         </div>

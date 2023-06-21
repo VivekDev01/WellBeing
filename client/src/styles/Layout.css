@@ -72,3 +72,24 @@
 .active a, .active i{
     color: rgb(0, 0, 0);
 }
+
+.header-content{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    justify-content: flex-end;
+    margin: 0 15px;
+}
+
+.header-content i{
+    margin-right: 20px;
+    font-size: 1.2rem;
+}
+
+.header-content a{
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: blue;
+    margin: 0 10px;
+    text-transform: uppercase;
+}

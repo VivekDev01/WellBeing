@@ -43,10 +43,14 @@ const doctorSchema= new mongoose.Schema({
         type: Object,
         required: [true, "Work timing is required"]
     },
+    status:{
+        type:String,
+        default: 'Pending'
+    },
 
 }, {timestamps:true});
 //timestamps: true ----> to capture all the time
 
-const doctorModel= mongoose.model('users', doctorSchema)
+const doctorModel= mongoose.model('doctors', doctorSchema)
 
 export default doctorModel;

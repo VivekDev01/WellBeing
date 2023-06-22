@@ -1,6 +1,7 @@
 import userModel from "../models/userModel.js"
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import doctorModel from "../models/doctorModel.js"
 
 //register callback
 const registerController= async(req, res)=>{
@@ -78,5 +79,35 @@ const authController= async (req, res) => {
 }
 
 
+const applyDoctorController = async(req, res) => {
+    try {
+        const newDoctor = await doctorModel({...req.body, status:'pending'})
+        await newDoctor.save();
+        const adminUser= await userModel.findOne({isAdmin:true})
+        const Notification= adminUser.Notification
+        Notification.push({
+            type:"apply-doctor-request",
+            message: `${newDoctor.firstName} ${newDoctor.lastName} has applied for a Doctor Account`,
+            data:{
+                doctorId:newDoctor._id,
+                name: newDoctor.firstName +" "+newDoctor.lastName,
+                onclickPath:'/admin/doctors'
+            }
+        })
+        await userModel.findByIdAndUpdate(adminUser._id, {Notification});
+        res.status(201).send({
+            success:true,
+            message:'Registration for Dector Account is done'
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success:false,
+            error,
+            message: 'Error while applying as a doctor'
+        })
+    }
+}
 
-export {loginController, registerController, authController};
+
+export {loginController, registerController, authController, applyDoctorController};

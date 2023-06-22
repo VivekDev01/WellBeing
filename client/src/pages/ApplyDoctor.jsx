@@ -99,7 +99,7 @@ const ApplyDoctor = () => {
 
                 {/* <Col xs={24} md={24} lg={8}></Col> */}
                 <Col xs={24} md={24} lg={8}>
-                    <button className='btn btn-primary form-btn' type='submit'>Submit</button>
+                    <button className='btn btn-primary form-btn text-center' type='submit'>Submit</button>
                 </Col>
             </Row>
         </Form>

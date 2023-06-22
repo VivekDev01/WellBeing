@@ -53,9 +53,13 @@ const sidebarMenu = user.isAdmin ? adminMenu : userMenu ;
           </div>
           <div className="content">
             <div className="header"> 
-              <div className="header-content">
+              <div className="header-content" style={{cursor:'pointer'}}>
 
-              <Badge count={user?Notification.length:0}>
+              <Badge 
+                count={user?Notification.length:0} 
+                onClick={()=>{Navigate("/notification")}}
+                
+              >
                 <i className="ri-notification-3-line"></i>
               </Badge>
 

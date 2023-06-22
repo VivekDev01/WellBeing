@@ -17,6 +17,22 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:[true, "Confirm your password"]
     },
+    isAdmin:{
+        type:Boolean,
+        default:false
+    },
+    isDoctor:{
+        type:Boolean,
+        default:false
+    },
+    Notification:{
+        type:Array,
+        default:[]
+    },
+    seenNotification:{
+        type:Array,
+        default:[]
+    },
 });
 
 const userModel = mongoose.model('user', userSchema);

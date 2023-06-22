@@ -1,15 +1,30 @@
 import React, { Children } from 'react';
 import "../styles/Layout.css";
-import { SidebarMenu } from '../Data/data';
-import { Link, useLocation } from "react-router-dom";
+import { adminMenu, userMenu } from '../Data/data';
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
+import {message} from 'antd'
 
 const Layout = ({ children }) => {
   const { user } = useSelector(state => state.user);
   const location = useLocation();
-  
+  const Navigate= useNavigate();
   // Null check for user object
-//   const userName = user ? user.name : '';
+//   const userName = user ? user.name : ''; 
+
+//logout Handling
+const handleLogout = () =>{
+  localStorage.clear();
+  message.success('Logout Successfully');
+  Navigate("/login")
+}
+
+//rendering menu list
+if(!user){
+   return Navigate("/login")
+}
+console.log(user.isAdmin);
+const sidebarMenu = user.isAdmin ? adminMenu : userMenu ;
 
   return (
     <>
@@ -21,7 +36,7 @@ const Layout = ({ children }) => {
               <hr />
             </div>
             <div className="menu">
-              {SidebarMenu.map(menu => {
+              {sidebarMenu && sidebarMenu.map(menu => {
                 const isActive = location.pathname === menu.path;
                 return (
                   <div className={`menu-item ${isActive && "active"}`} key={menu.path}>
@@ -30,6 +45,10 @@ const Layout = ({ children }) => {
                   </div>
                 );
               })}
+              <div className="menu-item" onClick={handleLogout} >
+                    <i className="ri-logout-box-r-line"></i>
+                    <Link to="/login">Logout</Link>
+              </div>
             </div>
           </div>
           <div className="content">

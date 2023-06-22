@@ -1,9 +1,9 @@
-import React, { Children } from 'react';
+import React, { children } from 'react';
 import "../styles/Layout.css";
 import { adminMenu, userMenu } from '../Data/data';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import {message} from 'antd'
+import {message, Badge, notification} from 'antd'
 
 const Layout = ({ children }) => {
   const { user } = useSelector(state => state.user);
@@ -54,7 +54,11 @@ const sidebarMenu = user.isAdmin ? adminMenu : userMenu ;
           <div className="content">
             <div className="header"> 
               <div className="header-content">
+
+              <Badge count={user?Notification.length:0}>
                 <i className="ri-notification-3-line"></i>
+              </Badge>
+
                 <Link to="/profile">{user?user.name:''}</Link>
               </div>
             </div>

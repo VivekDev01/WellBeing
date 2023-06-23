@@ -29,13 +29,18 @@ export const adminMenu =  [
         icon:'ri-home-heart-line'
     },
     {
+        name:'Hospitals',
+        path:'/admin/hospitals',
+        icon: 'ri-hospital-line'
+    },
+    {
         name:'Doctors',
-        path:'/doctors',
+        path:'/admin/doctors',
         icon: 'fa-regular fa-calendar-check'
     },
     {
         name:'Users', 
-        path:'/users',
+        path:'/admin/users',
         icon:'fa-solid fa-user-doctor'
     },
     {
@@ -44,3 +49,5 @@ export const adminMenu =  [
         icon:'fa-solid fa-user-doctor'
     },
 ]
+
+

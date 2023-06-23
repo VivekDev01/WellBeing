@@ -12,7 +12,7 @@ import NotificationPage from "./pages/NotificationPage";
 import Docters from "./pages/admin/Doctors";
 import Hospitals from "./pages/admin/Hospitals";
 import Users from "./pages/admin/Users";
-import Profile from "./pages/doctor/profile";
+import Profile from "./pages/doctor/Profile";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);

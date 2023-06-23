@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import router from "./routes/userRoutes.js";
 import adminRouter from "./routes/adminRoutes.js";
+import doctorRouter from "./routes/doctorRoutes.js";
 
 //dotenv config
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(morgan('dev'));
 //routes
 app.use("/api/v1/user", router);
 app.use("/api/v1/admin", adminRouter);
+app.use("/api/v1/doctor", doctorRouter);
 
 //listen port
 const port=process.env.PORT || 4000

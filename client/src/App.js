@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, Routes, Route} from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import HomePage from "./pages/HomePage";
@@ -12,78 +12,93 @@ import NotificationPage from "./pages/NotificationPage";
 import Docters from "./pages/admin/Doctors";
 import Hospitals from "./pages/admin/Hospitals";
 import Users from "./pages/admin/Users";
+import Profile from "./pages/doctor/profile";
 
 function App() {
-  const {loading} = useSelector(state => state.alerts)
+  const { loading } = useSelector((state) => state.alerts);
   return (
     <>
       <BrowserRouter>
-      {loading ? <Spinner/> :
+        {loading ? (
+          <Spinner />
+        ) : (
           <Routes>
-
             {/* home */}
-            <Route path="/" 
-            element={
-              <ProtectedRoute>
-                <HomePage/>
-              </ProtectedRoute>
-            }/>
-
-              {/* apply-doctor */}
-              <Route path="/apply-doctor" 
+            <Route
+              path="/"
               element={
                 <ProtectedRoute>
-                  <ApplyDoctor/>
+                  <HomePage />
                 </ProtectedRoute>
-              }/>
-
-
-              <Route path="/admin/doctors" 
+              }
+            />
+            {/* apply-doctor */}
+            <Route
+              path="/apply-doctor"
               element={
                 <ProtectedRoute>
-                  <Docters/>
+                  <ApplyDoctor />
                 </ProtectedRoute>
-              }/>
-
-
-              {/* <Route path="/admin/hospitals" 
+              }
+            />
+            <Route
+              path="/admin/doctors"
+              element={
+                <ProtectedRoute>
+                  <Docters />
+                </ProtectedRoute>
+              }
+            />
+            {/* <Route path="/admin/hospitals" 
               element={
                 <ProtectedRoute>
                   <Hospitals/>
                 </ProtectedRoute>
               }/> */}
-
-
-              <Route path="/admin/users" 
+            <Route
+              path="/admin/users"
               element={
                 <ProtectedRoute>
-                  <Users/>
+                  <Users />
                 </ProtectedRoute>
-              }/>
+              }
+            />
 
-
-
-              <Route path="/notification" 
+            <Route
+              path="/doctor/profile/:id"
               element={
                 <ProtectedRoute>
-                  <NotificationPage/>
+                  <Profile />
                 </ProtectedRoute>
-              }/>
+              }
+            />
 
-
-            <Route path="/login" element={
-            <PublicRoute>
-              <Login/>
-            </PublicRoute>
-            }/>
-            
-            <Route path="/register" element={
-              <PublicRoute>
-                <Register/>
-              </PublicRoute>
-            }/>
+            <Route
+              path="/notification"
+              element={
+                <ProtectedRoute>
+                  <NotificationPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <PublicRoute>
+                  <Login />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <PublicRoute>
+                  <Register />
+                </PublicRoute>
+              }
+            />
           </Routes>
-      }
+        )}
       </BrowserRouter>
     </>
   );

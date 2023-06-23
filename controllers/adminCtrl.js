@@ -1,5 +1,5 @@
-import doctorModel from "../models/doctorModel"
-import userModel from "../models/userModel"
+import doctorModel from "../models/doctorModel.js"
+import userModel from "../models/userModel.js"
 
 const getAllUsersController = async(req, res) => {
     try {
@@ -36,21 +36,21 @@ const getAllDoctorsController = async(req, res) => {
     }
 }
 
-const getAllHospitalsController = async() => {
-    try {
-        const hospitals = await hospitalModel.find({})
-        res.status(200).send({
-            success:true,
-            message:"Hospitals data list fetched successfully",
-            data:hospitals
-        })
-    } catch (error) {
-        console.log(error)
-        res.status(500).send({
-            success: false,
-            message: "Error while fetching hospitals"
-        })
-    }
-}
+// const getAllHospitalsController = async() => {
+//     try {
+//         const hospitals = await hospitalModel.find({})
+//         res.status(200).send({
+//             success:true,
+//             message:"Hospitals data list fetched successfully",
+//             data:hospitals
+//         })
+//     } catch (error) {
+//         console.log(error)
+//         res.status(500).send({
+//             success: false,
+//             message: "Error while fetching hospitals"
+//         })
+//     }
+// }
 
-export {getAllDoctorsController, getAllHospitalsController, getAllUsersController};
+export {getAllDoctorsController,  getAllUsersController};

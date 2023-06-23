@@ -28,11 +28,11 @@ export const adminMenu =  [
         path:'/',
         icon:'ri-home-heart-line'
     },
-    {
-        name:'Hospitals',
-        path:'/admin/hospitals',
-        icon: 'ri-hospital-line'
-    },
+    // {
+    //     name:'Hospitals',
+    //     path:'/admin/hospitals',
+    //     icon: 'ri-hospital-line'
+    // },
     {
         name:'Doctors',
         path:'/admin/doctors',

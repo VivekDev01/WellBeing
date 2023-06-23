@@ -4,6 +4,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import router from "./routes/userRoutes.js";
+import adminRouter from "./routes/adminRoutes.js";
 
 //dotenv config
 dotenv.config();
@@ -20,6 +21,7 @@ app.use(morgan('dev'));
 
 //routes
 app.use("/api/v1/user", router);
+app.use("/api/v1/admin", adminRouter);
 
 //listen port
 const port=process.env.PORT || 4000

@@ -46,12 +46,12 @@ function App() {
               }/>
 
 
-              <Route path="/admin/hospitals" 
+              {/* <Route path="/admin/hospitals" 
               element={
                 <ProtectedRoute>
                   <Hospitals/>
                 </ProtectedRoute>
-              }/>
+              }/> */}
 
 
               <Route path="/admin/users" 

@@ -1,16 +1,16 @@
 import express from "express";
-import authMiddleware from "../middlewares/authMiddleware";
-import { getAllDoctorsController, getAllHospitalsController, getAllUsersController } from "../controllers/adminCtrl";
+import authMiddleware from "../middlewares/authMiddleware.js";
+import { getAllDoctorsController, getAllUsersController } from "../controllers/adminCtrl.js";
 
-const router = express.Router()
+const adminRouter = express.Router()
 
 //GET METHOD || USERS
-router.get('/getAllUsers', authMiddleware, getAllUsersController)
+adminRouter.get('/getAllUsers', authMiddleware, getAllUsersController)
 
 //GET METHOD || DOCTORS
-router.get("/getAllDoctors", authMiddleware, getAllDoctorsController)
+adminRouter.get("/getAllDoctors", authMiddleware, getAllDoctorsController)
 
 //GET METHOD || HOSPITALS
-router.get("/getAllHospitals", authMiddleware, getAllHospitalsController)
+// adminRouter.get("/getAllHospitals", authMiddleware, getAllHospitalsController)
 
-export default router;
+export default adminRouter;

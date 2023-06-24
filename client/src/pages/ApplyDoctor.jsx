@@ -24,7 +24,7 @@ const ApplyDoctor = () => {
             })
             dispatch(hideLoading());
             if(res.data.success){
-                message.success(res.data.success);
+                message.success(res.data.message);
                 navigate('/')
             }
             else{

@@ -2,6 +2,8 @@ import userModel from "../models/userModel.js"
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import doctorModel from "../models/doctorModel.js"
+import appointmentModel from "../models/appointmentModel.js"
+import moment from "moment";
 
 //register callback
 const registerController= async(req, res)=>{
@@ -177,4 +179,33 @@ const getAllDoctorsController = async(req, res) => {
 }
 
 
-export {loginController, registerController, authController, applyDoctorController, getAllNotificationController, deleteAllNotificationController, getAllDoctorsController};
+const bookAppointmentController = async(req, res) => {
+    try {
+        req.body.date= moment(req.body.date).format('DD-MM-YYYY').toString()
+        req.body.time= moment(req.body.time).format('HH:mm').toString()
+        req.body.status = "pending"
+        const newAppointment = new appointmentModel(req.body)
+        await newAppointment.save()
+        const user= await userModel.findOne({_id: req.body.doctorInfo.userId})
+        user.Notification.push({
+            type:"New-Appointment-Request",
+            message: `You have a new Appointment Request from ${req.body.userInfo.name}`,
+            onclickPath:'/user/appointments'
+        })
+        await user.save()
+        res.status(200).send({
+            success:true,
+            message: "Appointment Booked Successfully",
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success:false,
+            message: "Error while booking appointment",
+            error
+        })
+    }
+}
+
+
+export {loginController, registerController, authController, applyDoctorController, getAllNotificationController, deleteAllNotificationController, getAllDoctorsController, bookAppointmentController};

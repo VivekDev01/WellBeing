@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {showLoading, hideLoading} from "../redux/features/alertSlice"
 import axios from "axios"
+import moment from 'moment'
 
 const ApplyDoctor = () => {
 
@@ -17,7 +18,13 @@ const ApplyDoctor = () => {
     const handleFinish=async (values)=>{
         try {
             dispatch(showLoading())
-            const res= await axios.post("/api/v1/user/apply-doctor", {...values, userId:user._id},{
+            const res= await axios.post("/api/v1/user/apply-doctor", {...values, userId:user._id , 
+                timing:[
+                    moment(values.timing[0]).format("HH:mm"),
+                    moment(values.timing[1]).format("HH:mm")
+                ],
+            },
+            {
                 headers:{
                     Authorization:`Bearer ${localStorage.getItem("token")}`
                 }

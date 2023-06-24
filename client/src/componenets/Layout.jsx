@@ -47,7 +47,7 @@ const Layout = ({ children }) => {
 
   //rendering menu list
 
-  console.log(user.isAdmin);
+  // console.log(user.isAdmin);
   const sidebarMenu = user.isAdmin
     ? adminMenu
     : user.isDoctor

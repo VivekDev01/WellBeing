@@ -1,5 +1,5 @@
 import express from "express";
-import { authController, loginController, registerController, applyDoctorController, getAllNotificationController, deleteAllNotificationController } from "../controllers/userCtrl.js";
+import { authController, loginController, registerController, applyDoctorController, getAllNotificationController, deleteAllNotificationController, getAllDoctorsController } from "../controllers/userCtrl.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 
 //rputer object
@@ -24,6 +24,9 @@ router.post('/get-all-notification', authMiddleware, getAllNotificationControlle
 
 //Notification|| POST
 router.post('/delete-all-notification', authMiddleware, deleteAllNotificationController)
+
+//Get all doctors || GET
+router.get('/getAllDoctors', authMiddleware, getAllDoctorsController)
 
 
 export default router;

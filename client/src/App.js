@@ -14,6 +14,7 @@ import Hospitals from "./pages/admin/Hospitals";
 import Users from "./pages/admin/Users";
 import Profile from "./pages/doctor/Profile";
 import BookingPage from "./pages/BookingPage";
+import Appointments from "./pages/Appointments";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -107,6 +108,16 @@ function App() {
                 </PublicRoute>
               }
             />
+
+            <Route
+              path="/appointments"
+              element={
+                <ProtectedRoute>
+                  <Appointments/>
+                </ProtectedRoute>
+              }
+            />
+
           </Routes>
         )}
       </BrowserRouter>

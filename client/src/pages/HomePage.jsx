@@ -13,7 +13,7 @@ const HomePage = () => {
       const res= await axios.get('/api/v1/user/getAllDoctors', 
       {
         headers:{
-          Authorization: "Bearer " + localStorage.getItem('token'),
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
       if(res.data.success){

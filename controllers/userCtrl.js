@@ -181,8 +181,8 @@ const getAllDoctorsController = async(req, res) => {
 
 const bookAppointmentController = async(req, res) => {
     try {
-        req.body.date= moment(req.body.date).format('DD-MM-YYYY').toString()
-        req.body.time= moment(req.body.time).format('HH:mm').toString()
+        req.body.date = moment(req.body.date, 'DD-MM-YYYY').toISOString();
+        req.body.time = moment(req.body.time, 'HH:mm').toISOString();
         req.body.status = "pending"
         const newAppointment = new appointmentModel(req.body)
         await newAppointment.save()
@@ -207,5 +207,53 @@ const bookAppointmentController = async(req, res) => {
     }
 }
 
+const bookingAvailabilityController = async(req, res) => {
+    try {
+        const date= moment(req.body.date, 'DD-MM-YYYY').toISOString();
+        const fromTime=moment(req.body.time, 'HH:mm').subtract(1, 'hours').toISOString(); 
+        const toTime=moment(req.body.time, 'HH:mm').add(1, 'hours').toISOString(); 
+        const doctorId= req.body.doctorId;
+        const appointments = await appointmentModel.find({doctorId, date, time:{$gte:fromTime, $lte:toTime}})
+        if(appointments.length>0){
+            return res.status(200).send({
+                success:true,
+                message: "Appointment Not Available at this time",
+            })
+        }
+        else{
+            return res.status(200).send({
+                    success:true,
+                    message: "Appointment Available at this time",
+                })
+            }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success:false,
+            message: "Error while checking booking availability",
+            error
+        })
+    }
+}
 
-export {loginController, registerController, authController, applyDoctorController, getAllNotificationController, deleteAllNotificationController, getAllDoctorsController, bookAppointmentController};
+
+const userAppointmentsController = async(req, res) => {
+    try {
+        const appointments= await appointmentModel.find({userId: req.body.userId})
+        res.status(200).send({
+            success:true,
+            message: "User Appointments fetched Successfully",
+            data: appointments
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success:false,
+            message: "Error while fetching user appointments",
+            error
+        })
+    }
+}
+
+
+export {loginController, registerController, authController, applyDoctorController, getAllNotificationController, deleteAllNotificationController, getAllDoctorsController, bookAppointmentController, bookingAvailabilityController, userAppointmentsController};

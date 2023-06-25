@@ -25,7 +25,7 @@ const BookingPage = () => {
         { doctorId: params.doctorId },
         {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
@@ -40,6 +40,10 @@ const BookingPage = () => {
 
   const handleBooking = async () => {
     try {
+      setIsAvailable(true)
+      if(!date && !time){
+        return alert("Please select date and time")
+      }
       dispatch(showLoading())
       const res = await axios.post(
         "/api/v1/user/book-appointment",
@@ -53,7 +57,7 @@ const BookingPage = () => {
         },
         {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
@@ -66,6 +70,30 @@ const BookingPage = () => {
       console.log(error);
     }
   }
+
+
+  const handleAvailability = async () => {
+    try {
+      dispatch(showLoading())
+      const res = await axios.post("/api/v1/user/booking-availability", {doctorId: params.doctorId, date, time},
+       {
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }})
+        dispatch(hideLoading())
+        if(res.data.success){
+          setIsAvailable(true)
+          message.success(res.data.message)
+        }
+        else{
+          message.error(res.data.message)
+        }
+    } catch (error) {
+      dispatch(hideLoading())
+      console.log(error)
+    }
+  }
+
 
   useEffect(() => {
     getUserData();
@@ -86,20 +114,27 @@ const BookingPage = () => {
 
             <div className="d-dlex flex-column w-50">
               <DatePicker
+                aria-required="true"
                 className="m-2"
                 format={"DD-MM-YYYY"}
-                onChange={(value) =>
+                onChange={(value) =>{
                   setDate(moment(value).format("DD-MM-YYYY"))
+                }
                 }
               />
               <TimePicker
                 className="m-2"
-                onChange= { (value) => setTime(moment(value).format("HH:mm"))}
+                onChange= { (value) =>{ 
+                  setTime(moment(value).format("HH:mm"))}}
               />
-              <button className="btn btn-primary mt-2">
+              <button className="btn btn-primary m-2" onClick={handleAvailability}>
                 Check Availability
               </button>
-              <button className="btn btn-success mt-2" onClick={handleBooking}>Book Now</button>
+              
+                <button className="btn btn-success m-2" onClick={handleBooking}>
+                  Book Now
+                </button>
+              
             </div>
           </div>
         )}

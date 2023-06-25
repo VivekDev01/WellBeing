@@ -1,4 +1,6 @@
 import doctorModel from "../models/doctorModel.js"
+import appointmentModel from "../models/appointmentModel.js"
+import userModel from "../models/userModel.js"
 
 const getDoctorInfoController= async(req, res) => {
     try {
@@ -57,4 +59,52 @@ const getDoctorByIdController = async(req, res) => {
 }
 
 
-export {getDoctorInfoController, updateProfileContoller, getDoctorByIdController}
+const doctorAppointmentsController = async(req, res) => {
+    try {
+        const doctor = await doctorModel.findOne({userId: req.body.userId})
+        const appointments = await appointmentModel.find({doctorId: doctor._id})
+        
+        res.status(200).send({
+            success:true,
+            message: "Doctor appointments fetched successfully",
+            data: appointments
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success:false,
+            error,
+            message:"Error in fetching doctor appointments"
+        })
+    }
+}
+
+
+const updateStatusController = async(req, res) => {
+    try {
+        const {appointmentsId, status} = req.body
+        const appointments = await appointmentModel.findByIdAndUpdate(appointmentsId, {status})
+        const user= await userModel.findOne({_id: appointments.userId})
+        const Notification= user.Notification
+        Notification.push({
+            type:"Status-updated",
+            message: `Your Appointment has been updated ${status}`,
+            onclickPath:'/doctor-appointments'
+        })
+        await user.save()
+        res.status(200).send({
+            success:true,
+            message: "Appointment status updated successfully",
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success:false,
+            error,
+            message:"Error in updating appointment status"
+        })
+    }
+}
+
+
+export {getDoctorInfoController, updateProfileContoller, getDoctorByIdController, doctorAppointmentsController, updateStatusController}

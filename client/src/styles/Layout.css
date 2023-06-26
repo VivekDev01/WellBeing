@@ -1,3 +1,4 @@
+/* header */
 /* ================================================================================================================================================================== */
 .menu-4 {
     text-align: center;
@@ -52,6 +53,7 @@
     transform: translateY(100%);
   }
 
+  /* sidebar  */
 /* ====================================================================================================================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
@@ -78,6 +80,12 @@ body{
              inset 3px 3px 5px #ceced1;
  transition: all 0.3s ease;
 }
+
+.sidebar.active{
+  float: left;
+  left: 0;
+}
+
 .side_bar .title{
   display: flex;
   justify-content: space-evenly;
@@ -198,25 +206,16 @@ label:hover{
 .layout{
     display: flex;
 }
-
-/* .header{
+/* 
+.header{
     height: 8vh;
     margin: 20px;
     box-shadow: 0 0 2px gray;
     background-color:  rgb(253, 253, 253);
     border-radius: 5px;
 
-} */
-
-.sidebar{
-    /* min-height: 100%; */
-    width: 300px;
-    border-radius: 5px;
-    background-color: rgb(253, 253, 253);
-    box-shadow: 0 0 2px gray;
-    margin-right: 20px;
-    color: rgb(0, 0, 0);
 }
+
 
 .content{
     width: 100%;
@@ -226,7 +225,6 @@ label:hover{
 
 
 .body{
-    /* height: 85vh; */
     margin-bottom: 20px;
     box-shadow: 0 0 2px gray;
     background-color:  rgb(253, 253, 253);
@@ -286,4 +284,4 @@ label:hover{
     color: blue;
     margin: 0 10px;
     text-transform: uppercase;
-}
+} */

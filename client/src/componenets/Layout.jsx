@@ -57,6 +57,8 @@ const Layout = ({ children }) => {
   return (
     <>
       <div className="main">
+
+        {/* header */}
         {/* ====================================================================================================================================== */}
 
         <header className="header">
@@ -98,6 +100,7 @@ const Layout = ({ children }) => {
 
         <div className="first justify-content-center"></div>
 
+        {/* sidebar */}
         {/* ============================================================================================================================================ */}
 
         <div>
@@ -150,16 +153,16 @@ const Layout = ({ children }) => {
               {/* --------------------------------------------- */}
             </ul>
             <div className="media_icons">
-              <a href="#">
+              <a href="https://www.facebook.com/vivekdev.shah/" target="_blank">
                 <i className="fab fa-facebook-f" />
               </a>
-              <a href="#">
+              <a href="https://twitter.com/Vivek_Dev01/" target="_blank">
                 <i className="fab fa-twitter" />
               </a>
-              <a href="#">
+              <a href="https://instagram.com/vivek_dev01" target="_blank">
                 <i className="fab fa-instagram" />
               </a>
-              <a href="#">
+              <a href="https://youtube.com/@vivekdevshah" target="_blank">
                 <i className="fab fa-youtube" />
               </a>
             </div>

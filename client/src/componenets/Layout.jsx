@@ -62,159 +62,171 @@ const Layout = ({ children }) => {
 
   return (
     <>
-    <div>
-      {/* Header */}
-      <header style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '50px', backgroundColor: 'lightblue' }}>
-        {/* Header content */}
-        <nav class="style-4">
-              <ul class="menu-4">
-                <li class="current">
-                  <a href="#" data-hover="Home">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="#" data-hover="About Us">
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a href="#" data-hover="Blog">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="#" data-hover="Services">
-                    Services
-                  </a>
-                </li>
-                <li>
-                  <a href="#" data-hover="Products">
-                    Products
-                  </a>
-                </li>
-                <li>
-                  <a href="#" data-hover="Contact">
-                    Contact
-                  </a>
-                </li>
-                <li style={{ float: "right" }}>
-                  <a href="/profile" data-hover="Profile">
-                    <i class="fa-solid fa-user"></i>
-                    {user ? user.name : <Link to="/login">Login/Register</Link>}
-                  </a>
-                </li>
-                <li
-                  style={{ float: "right", cursor: "pointer" }}
-                  data-hover="Notification"
+      <div>
+        {/* Header */}
+        <header
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "50px",
+            backgroundColor: "lightblue",
+          }}
+        >
+          {/* Header content */}
+          <nav class="style-4">
+            <ul class="menu-4">
+              <li class="current">
+                <a href="#" data-hover="Home">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="#" data-hover="About Us">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="#" data-hover="Blog">
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a href="#" data-hover="Services">
+                  Services
+                </a>
+              </li>
+              <li>
+                <a href="#" data-hover="Products">
+                  Products
+                </a>
+              </li>
+              <li>
+                <a href="#" data-hover="Contact">
+                  Contact
+                </a>
+              </li>
+              <li style={{ float: "right" }}>
+                <a href="/profile" data-hover="Profile">
+                  <i class="fa-solid fa-user"></i>
+                  {user ? user.name : <Link to="/login">Login/Register</Link>}
+                </a>
+              </li>
+              <li
+                style={{ float: "right", cursor: "pointer" }}
+                data-hover="Notification"
+              >
+                <Badge
+                  count={user ? user.Notification.length : 0}
+                  onClick={() => {
+                    Navigate("/notification");
+                  }}
                 >
-                  <Badge
-                    count={user ? user.Notification.length : 0}
-                    onClick={() => {
-                      Navigate("/notification");
-                    }}
-                  >
-                    <i className="fa-solid fa-bell fa-xl"></i>
-                  </Badge>
-                </li>
-              </ul>
-            </nav>
-      </header>
+                  <i className="fa-solid fa-bell fa-xl"></i>
+                </Badge>
+              </li>
+            </ul>
+          </nav>
+        </header>
 
-      {/* Sidebar */}
-      <input type="checkbox"  onClick={toggleSidebar} id="check" />
-              <label className="button bars" htmlFor="check">
-                <i className="fas fa-bars" />
-              </label>
-      {showSidebar && (
-        <aside style={{ position: 'fixed', top: '50px', left: 0, width: '0', backgroundColor: 'lightgray', height: '100%' }}>
-          {/* Sidebar content */}
-          <div className="side_bar">
-                <div className="title">
-                  <div className="logo">WellBeing</div>
-                  <label className=" button cancel" htmlFor="check">
-                    <i className="fas fa-times" />
-                  </label>
-                </div>
-                <ul>
+        {/* Sidebar */}
+        <input type="checkbox"  onClick={toggleSidebar} id="check" />
+        <label className="button bars" htmlFor="check">
+          <i className="fas fa-bars" />
+        </label>
+        {showSidebar && (
+          <aside
+            style={{
+              position: "fixed",
+              top: "50px",
+              left: 0,
+              width:0,
+              backgroundColor: "lightgray",
+              height: "100%",
+            }}
+          >
+            {/* Sidebar content */}
+            <div className="side_bar">
+              <div className="title">
+                <div className="logo">WellBeing</div>
+                <label className=" button cancel" htmlFor="check">
+                  <i className="fas fa-times" />
+                </label>
+              </div>
+              <ul>
+                <li>
+                  <a href="#">
+                    <i className="fas fa-qrcode" />
+                    Dashboard
+                  </a>
+                </li>
+
+                {sidebarMenu &&
+                  sidebarMenu.map((menu) => {
+                    const isActive = location.pathname === menu.path;
+                    return (
+                      <div
+                        className={`menu-item ${isActive && "active"}`}
+                        key={menu.path}
+                      >
+                        <li>
+                          <a href={menu.path}>
+                            <i className={menu.icon} />
+                            {menu.name}
+                          </a>
+                        </li>
+                      </div>
+                    );
+                  })}
+                <div className="menu-item" onClick={handleLogout}>
                   <li>
-                    <a href="#">
-                      <i className="fas fa-qrcode" />
-                      Dashboard
+                    <a href="/login">
+                      <i className="ri-logout-box-r-line" />
+                      Logout
                     </a>
                   </li>
-
-                  {sidebarMenu &&
-                    sidebarMenu.map((menu) => {
-                      const isActive = location.pathname === menu.path;
-                      return (
-                        <div
-                          className={`menu-item ${isActive && "active"}`}
-                          key={menu.path}
-                        >
-                          <li>
-                            <a href={menu.path}>
-                              <i className={menu.icon} />
-                              {menu.name}
-                            </a>
-                          </li>
-                        </div>
-                      );
-                    })}
-                  <div className="menu-item" onClick={handleLogout}>
-                    <li>
-                      <a href="/login">
-                        <i className="ri-logout-box-r-line" />
-                        Logout
-                      </a>
-                    </li>
-                  </div>
-
-                </ul>
-                <div className="media_icons">
-                  <a
-                    href="https://www.facebook.com/vivekdev.shah/"
-                    target="_blank"
-                  >
-                    <i className="fab fa-facebook-f" />
-                  </a>
-                  <a href="https://twitter.com/Vivek_Dev01/" target="_blank">
-                    <i className="fab fa-twitter" />
-                  </a>
-                  <a href="https://instagram.com/vivek_dev01" target="_blank">
-                    <i className="fab fa-instagram" />
-                  </a>
-                  <a href="https://youtube.com/@vivekdevshah" target="_blank">
-                    <i className="fab fa-youtube" />
-                  </a>
                 </div>
+              </ul>
+              <div className="media_icons">
+                <a
+                  href="https://www.facebook.com/vivekdev.shah/"
+                  target="_blank"
+                >
+                  <i className="fab fa-facebook-f" />
+                </a>
+                <a href="https://twitter.com/Vivek_Dev01/" target="_blank">
+                  <i className="fab fa-twitter" />
+                </a>
+                <a href="https://instagram.com/vivek_dev01" target="_blank">
+                  <i className="fab fa-instagram" />
+                </a>
+                <a href="https://youtube.com/@vivekdevshah" target="_blank">
+                  <i className="fab fa-youtube" />
+                </a>
               </div>
-        </aside>
-      )}
+            </div>
+          </aside>
+        )}
 
-      {/* Main Content */}
-      <main style={{ marginLeft: showSidebar ? '200px' : 0, marginTop: '50px' }}>
-        {/* Main content */}
+        {/* Main Content */}
+        <main
+          style={{ marginLeft: showSidebar ? "300px" : 0, marginTop: "50px" }}
+        >
+          {/* Main content */}
           {children}
-      </main>
+        </main>
+      </div>
+      {/* header */}
+      {/* ====================================================================================================================================== */}
 
-      
-    </div>
-        {/* header */}
-        {/* ====================================================================================================================================== */}
+      {/* sidebar */}
+      {/* ============================================================================================================================================ */}
 
-       
+      {/* ================================================================================================================================================================ */}
 
-          {/* sidebar */}
-          {/* ============================================================================================================================================ */}
-              
-
-              
-          {/* ================================================================================================================================================================ */}
-
-
-        {/* ================================================================================================================================================================ */}
-        {/* <div className="layout">
+      {/* ================================================================================================================================================================ */}
+      {/* <div className="layout">
         <div className="header">
               <div className="header-content" style={{ cursor: "pointer" }}>
                 <Badge

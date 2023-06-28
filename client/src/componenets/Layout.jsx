@@ -71,15 +71,30 @@ const Layout = ({ children }) => {
             left: 0,
             right: 0,
             height: "50px",
-            backgroundColor: "lightblue",
+            backgroundColor: "#ecf0f3",
           }}
         >
           {/* Header content */}
           <nav class="style-4">
             <ul class="menu-4">
-              <li class="current">
-                <a href="#" data-hover="Home">
+              <li>
+                <a href="/" data-hover="Home">
                   Home
+                </a>
+              </li>
+              <li>
+                <a href="#" onClick={toggleSidebar} data-hover="Services">
+                  Services
+                </a>
+              </li>
+              <li>
+                <a href="#Doctors-list" data-hover="Doctors">
+                  Doctors
+                </a>
+              </li>
+              <li>
+                <a href="#Hospital-menu" data-hover="Hospitals">
+                  Hospitals
                 </a>
               </li>
               <li>
@@ -87,21 +102,7 @@ const Layout = ({ children }) => {
                   About Us
                 </a>
               </li>
-              <li>
-                <a href="#" data-hover="Blog">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" data-hover="Services">
-                  Services
-                </a>
-              </li>
-              <li>
-                <a href="#" data-hover="Products">
-                  Products
-                </a>
-              </li>
+
               <li>
                 <a href="#" data-hover="Contact">
                   Contact
@@ -123,25 +124,28 @@ const Layout = ({ children }) => {
                     Navigate("/notification");
                   }}
                 >
-                  <i className="fa-solid fa-bell fa-xl"></i>
+                  <i className="fa-solid fa-bell fa-lg mt-3"></i>
                 </Badge>
+              </li>
+              <li className="myBar" style={{ float: "left" }}>
+                <input type="checkbox" onClick={toggleSidebar} id="check" />
+                <label className="button bars" htmlFor="check">
+                  <i className="fas fa-bars" />
+                </label>
               </li>
             </ul>
           </nav>
         </header>
 
         {/* Sidebar */}
-        <input type="checkbox"  onClick={toggleSidebar} id="check" />
-        <label className="button bars" htmlFor="check">
-          <i className="fas fa-bars" />
-        </label>
+
         {showSidebar && (
           <aside
             style={{
               position: "fixed",
               top: "50px",
               left: 0,
-              width:0,
+              width: 0,
               backgroundColor: "lightgray",
               height: "100%",
             }}

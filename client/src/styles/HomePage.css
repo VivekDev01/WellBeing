@@ -1,12 +1,15 @@
 #banner{
-    height: 80vh;
-    margin-top: 100px;
+    min-height: 80px;
+    margin-top: 50px;
 }
 #banner h1{
-    font-size: 70px;
+    font-size: 80px;
     text-align: left;
     line-height: 1.5;
     white-space: pre-line;
+}
+#banner img{
+  width: 100%;
 }
 @media (max-width: 768px) {
     #banner h1{

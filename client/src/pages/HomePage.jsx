@@ -4,6 +4,7 @@ import Layout from "../componenets/Layout";
 import { Row } from "antd";
 import DoctorList from "../componenets/DoctorList";
 import "../styles/HomePage.css";
+import img from "../images/banner.png";
 
 const HomePage = () => {
   const [doctors, setDoctors] = useState([]);
@@ -30,17 +31,22 @@ const HomePage = () => {
 
   return (
     <Layout>
-    <section id="banner">
-  <div className="container text-center">
-    <div className="row">
-      <div className="col banner-title">
-        <h1>Your <span style={{color:"#00cc00"}}>Health</span>, our <span style={{color:"#ff6600"}}>Priority</span>. Book your <span style={{color:"#4d4dff"}}>Appointment</span> Today!</h1>
-      </div>
-      <div className="col">Column</div>
-    </div>
-  </div>
-</section>
-
+      <section id="banner">
+        <div className="container text-center">
+          <div className="row">
+            <div className="col banner-title">
+              <h1>
+                Your <span style={{ color: "#00cc00" }}>Health</span>, our{" "}
+                <span style={{ color: "#ff6600" }}>Priority</span>. Book your{" "}
+                <span style={{ color: "#4d4dff" }}>Appointment</span> Today!
+              </h1>
+            </div>
+            <div className="col">
+              <img src={img} alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section classname="info">
         <div id="top">

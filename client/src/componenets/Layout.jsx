@@ -62,15 +62,15 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <div>
+      <div className="container">
         {/* Header */}
-        <header
+        <header id="header"
           style={{
             position: "fixed",
             top: 0,
             left: 0,
             right: 0,
-            height: "50px",
+            maxHeight: "50px",
             backgroundColor: "#ecf0f3",
           }}
         >
@@ -108,7 +108,7 @@ const Layout = ({ children }) => {
                   Contact
                 </a>
               </li>
-              <li style={{ float: "right" }}>
+              <li style={{position:'absolute', float: "right" }}>
                 <a href="/profile" data-hover="Profile">
                   <i class="fa-solid fa-user"></i>
                   {user ? user.name : <Link to="/login">Login/Register</Link>}

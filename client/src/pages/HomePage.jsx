@@ -50,14 +50,14 @@ const HomePage = () => {
 
       <section classname="info">
         <div id="top">
-          <header className="ribbon-container">
+          {/* <header className="ribbon-container">
             <h2 className="ribbon">
               <a className="ribbon-content">By Gerard Manley Hopkins</a>
             </h2>
-          </header>
+          </header> */}
         </div>
         <div id="bottom">
-          <header className="ribbon-container">
+          {/* <header className="ribbon-container">
             <h1 />
             <h2 className="ribbon">
               <a className="ribbon-content">Ribbon Overlay</a>
@@ -65,7 +65,7 @@ const HomePage = () => {
             <div className="underpage">
               <p></p>
             </div>
-          </header>
+          </header> */}
         </div>
       </section>
 

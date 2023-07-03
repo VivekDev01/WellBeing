@@ -32,24 +32,6 @@ const Appointments = () => {
         title:'ID',
         dataIndex:'_id',
     },
-    // {
-    //     title:'Name',
-    //     dataIndex:'name',
-    //     render:(text,record)=>(
-    //         <span>
-    //             {record.doctorId.firstName} {record.doctorId.lastName}
-    //         </span>
-    //     )
-    // },
-    // {
-    //     title:'Phone',
-    //     dataIndex:'phone',
-    //     render:(text,record)=>(
-    //         <span>
-    //             {record.doctorId.phone}
-    //         </span>
-    //     )
-    // },
    {
     title:'Date & Time',
     dataIndex:'date',

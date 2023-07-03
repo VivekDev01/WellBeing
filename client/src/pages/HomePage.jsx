@@ -3,11 +3,13 @@ import axios from "axios";
 import Layout from "../componenets/Layout";
 import { Row } from "antd";
 import DoctorList from "../componenets/DoctorList";
+import HospitalList from "../componenets/HopitalList";
 import "../styles/HomePage.css";
 import img from "../images/banner.png";
 
 const HomePage = () => {
   const [doctors, setDoctors] = useState([]);
+  const [hospitals, setHospitals] = useState([]);
 
   //login user data
   const getUserData = async () => {
@@ -25,8 +27,24 @@ const HomePage = () => {
     }
   };
 
+  const getHospitalsData = async () => {
+    try {
+      const res = await axios.get("/api/v1/user/getAllHospitals", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      if (res.data.success) {
+        setHospitals(res.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getUserData();
+    getHospitalsData();
   }, []);
 
   return (
@@ -75,6 +93,16 @@ const HomePage = () => {
         <Row>
           {doctors &&
             doctors.map((doctor, index) => <div className="col"> <DoctorList doctor={doctor} /> </div> )}
+        </Row>
+        </div>
+      </section>
+
+      <section id="Hospitals-list">
+      <div className="container mb-5 mt-5" >
+        <h1 className="text-center">Hopitals</h1>
+        <Row>
+          {hospitals &&
+            hospitals.map((hospital, index) => <div className="col"> <HospitalList hospital={hospital} /> </div> )}
         </Row>
         </div>
       </section>

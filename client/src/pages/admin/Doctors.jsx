@@ -1,11 +1,9 @@
-import React, {useState, useEffect} from 'react'
-import Layout from '../../componenets/Layout'
-import { Table, message } from 'antd';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import Layout from "../../componenets/Layout";
+import { Table, message } from "antd";
+import axios from "axios";
 
-
-const Docters = () => {
-
+const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
 
   //getUsers
@@ -24,21 +22,25 @@ const Docters = () => {
     }
   };
 
-  const handleAccountStatus= async(record, status) =>{
+  const handleAccountStatus = async (record, status) => {
     try {
-      const res = await axios.post('/api/v1/admin/changeAccountStatus', {doctorId: record._id, userId:record.userId, status:status},{
-        headers:{
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+      const res = await axios.post(
+        "/api/v1/admin/changeAccountStatus",
+        { doctorId: record._id, userId: record.userId, status: status },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-      })
-      if(res.data.success){
-        message.success(res.data.message)
-        window.location.reload()
+      );
+      if (res.data.success) {
+        message.success(res.data.message);
+        window.location.reload();
       }
     } catch (error) {
-      message.error('Something went wrong')
+      message.error("Something went wrong");
     }
-  }
+  };
 
   useEffect(() => {
     getDoctors();
@@ -49,28 +51,39 @@ const Docters = () => {
     {
       title: "Name",
       dataIndex: "name",
-      render: (text, record)=>(
-        <span>{record.firstName} {record.lastName}</span>
-      )
+      render: (text, record) => (
+        <span>
+          {record.firstName} {record.lastName}
+        </span>
+      ),
     },
     {
       title: "Email",
       dataIndex: "email",
     },
     {
-      title:'Phone',
-      dataIndex:'phone',
+      title: "Phone",
+      dataIndex: "phone",
     },
     {
-      title: 'Status', 
-      dataIndex: 'status',
+      title: "Status",
+      dataIndex: "status",
     },
     {
       title: "Actions",
       dataIndex: "actions",
       render: (text, record) => (
         <div className="d-flex">
-          {record.status === 'pending' ? <button className='btn btn-success' onClick={()=>handleAccountStatus(record, "approved")}>Approve</button>: <button className='btn btn-danger'>Reject</button>}
+          {record.status === "pending" ? (
+            <button
+              className="btn btn-success"
+              onClick={() => handleAccountStatus(record, "approved")}
+            >
+              Approve
+            </button>
+          ) : (
+            <button className="btn btn-danger">Reject</button>
+          )}
         </div>
       ),
     },
@@ -81,7 +94,7 @@ const Docters = () => {
       <h1 className="text-center m-2">Doctors List</h1>
       <Table columns={columns} dataSource={doctors} />
     </Layout>
-  )
-}
+  );
+};
 
-export default Docters
+export default Doctors;

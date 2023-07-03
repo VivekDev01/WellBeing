@@ -70,11 +70,13 @@ const HomePage = () => {
       </section>
 
       <section id="Doctors-list">
+        <div className="container mb-5 mt-5" >
         <h1 className="text-center">Doctors</h1>
         <Row>
           {doctors &&
-            doctors.map((doctor, index) => <DoctorList doctor={doctor} />)}
+            doctors.map((doctor, index) => <div className="col"> <DoctorList doctor={doctor} /> </div> )}
         </Row>
+        </div>
       </section>
     </Layout>
   );

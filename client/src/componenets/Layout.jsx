@@ -62,82 +62,84 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <div  style={{backgroundColor: "#ecf0f3"}}>
+      <div className="layout" style={{ backgroundColor: "#ecf0f3" }}>
         {/* Header */}
         <div>
-        <header id="header"
-         className="container"
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            maxHeight: "50px",
-            backgroundColor: "#ecf0f3",
-          }}
-        >
-          {/* Header content */}
-          <nav class="style-4">
-            <ul class="menu-4">
-              <li>
-                <a href="/" data-hover="Home">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#" onClick={toggleSidebar} data-hover="Services">
-                  Services
-                </a>
-              </li>
-              <li>
-                <a href="#Doctors-list" data-hover="Doctors">
-                  Doctors
-                </a>
-              </li>
-              <li>
-                <a href="#Hospital-menu" data-hover="Hospitals">
-                  Hospitals
-                </a>
-              </li>
-              <li>
-                <a href="#" data-hover="About Us">
-                  About Us
-                </a>
-              </li>
+          <header
+            id="header"
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              maxHeight: "50px",
+              backgroundColor: "#ecf0f3",
+            }}
+          >
+            <div className="container">
+              {/* Header content */}
+              <nav class="style-4">
+                <ul class="menu-4">
+                  <li>
+                    <a href="/" data-hover="Home">
+                      Home
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" onClick={toggleSidebar} data-hover="Services">
+                      Services
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#Doctors-list" data-hover="Doctors">
+                      Doctors
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#Hospital-menu" data-hover="Hospitals">
+                      Hospitals
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#footer" data-hover="About Us">
+                      About Us
+                    </a>
+                  </li>
 
-              <li>
-                <a href="#" data-hover="Contact">
-                  Contact
-                </a>
-              </li>
-              <li style={{position:'relative', float: "right" }}>
-                <a href="/profile" data-hover="Profile">
-                  <i class="fa-solid fa-user"></i>
-                  {user ? user.name : <Link to="/login">Login/Register</Link>}
-                </a>
-              </li>
-              <li
-                style={{ float: "right", cursor: "pointer" }}
-                data-hover="Notification"
-              >
-                <Badge
-                  count={user ? user.Notification.length : 0}
-                  onClick={() => {
-                    Navigate("/notification");
-                  }}
-                >
-                  <i className="fa-solid fa-bell fa-lg mt-3"></i>
-                </Badge>
-              </li>
-              <li className="myBar" style={{ float: "left" }}>
-                <input type="checkbox" onClick={toggleSidebar} id="check" />
-                <label className="button bars" htmlFor="check">
-                  <i className="fas fa-bars" />
-                </label>
-              </li>
-            </ul>
-          </nav>
-        </header>
+                  <li style={{ float: "right" }}>
+                    <a href="/profile" data-hover="Profile">
+                      <i class="fa-solid fa-user"></i>
+                      {user ? (
+                        user.name
+                      ) : (
+                        <Link to="/login">Login/Register</Link>
+                      )}
+                    </a>
+                  </li>
+                  <li
+                    style={{ float: "right", cursor: "pointer" }}
+                    data-hover="Notification"
+                  >
+                    <Badge
+                      count={user ? user.Notification.length : 0}
+                      onClick={() => {
+                        Navigate("/notification");
+                      }}
+                    >
+                      <i className="fa-solid fa-bell fa-lg mt-3"></i>
+                    </Badge>
+                  </li>
+
+                  <li className="myBar" style={{ float: "left" }}>
+                    <input type="checkbox" onClick={toggleSidebar} id="check" />
+                    <label className="button bars" htmlFor="check">
+                      <i className="fas fa-bars" />
+                    </label>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </header>
         </div>
 
         {/* Sidebar */}
@@ -221,66 +223,168 @@ const Layout = ({ children }) => {
           style={{ marginLeft: showSidebar ? "300px" : 0, marginTop: "50px" }}
         >
           {/* Main content */}
-          {children}
+          <div className="children-area">{children}</div>
+
+          <footer id="footer" className="footer-section">
+            <div className="container">
+              <div className="footer-cta pt-5 pb-5">
+                <div className="row">
+                  <div className="col-xl-4 col-md-4 mb-30">
+                    <div className="single-cta">
+                      <i className="fas fa-map-marker-alt" />
+                      <div className="cta-text">
+                        <h4>Find us</h4>
+                        <span>IIIT Ranchi, HEC Admin, JUPMI </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-xl-4 col-md-4 mb-30">
+                    <div className="single-cta">
+                      <i className="fas fa-phone" />
+                      <div className="cta-text">
+                        <h4>Call us</h4>
+                        <span>+91-6265898778</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-xl-4 col-md-4 mb-30">
+                    <div className="single-cta">
+                      <i className="far fa-envelope-open" />
+                      <div className="cta-text">
+                        <h4>Mail us</h4>
+                        <span>vivek65.ugcs20@iiitranchi.ac.in</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="footer-content pt-5 pb-5">
+                <div className="row">
+                  <div className="col-xl-4 col-lg-4 mb-50">
+                    <div className="footer-widget">
+                      <div className="footer-logo">
+                        <a href="index.html">
+                          <img
+                            src="https://i.ibb.co/QDy827D/ak-logo.png"
+                            className="img-fluid"
+                            alt="logo"
+                          />
+                        </a>
+                      </div>
+                      <div className="footer-text">
+                        <p>
+                          A plateform to take care of your health and well being
+                        </p>
+                      </div>
+                      <div className="footer-social-icon">
+                        <span>Follow us</span>
+                        <a
+                          href="https://www.facebook.com/vivekdev.shah/"
+                          target="_blank"
+                        >
+                          <i className="fab fa-facebook-f" />
+                        </a>
+                        <a
+                          href="https://twitter.com/Vivek_Dev01/"
+                          target="_blank"
+                        >
+                          <i className="fab fa-twitter" />
+                        </a>
+                        <a
+                          href="https://instagram.com/vivek_dev01"
+                          target="_blank"
+                        >
+                          <i className="fab fa-instagram instagram-bg" />
+                        </a>
+                        <a
+                          href="https://youtube.com/@vivekdevshah"
+                          target="_blank"
+                        >
+                          <i className="fab fa-youtube" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-xl-4 col-lg-4 col-md-6 mb-30">
+                    <div className="footer-widget">
+                      <div className="footer-widget-heading">
+                        <h3>Useful Links</h3>
+                      </div>
+                      <ul>
+                        <li>
+                          <a href="/">Home</a>
+                        </li>
+                        <li>
+                          <a href="#">about</a>
+                        </li>
+                        <li>
+                          <a href="#">services</a>
+                        </li>
+                        <li>
+                          <a href="#">portfolio</a>
+                        </li>
+                        <li>
+                          <a href="#">Contact</a>
+                        </li>
+                        <li>
+                          <a href="#">About us</a>
+                        </li>
+                        <li>
+                          <a href="#">Our Services</a>
+                        </li>
+                        <li>
+                          <a href="#">Expert Team</a>
+                        </li>
+                        <li>
+                          <a href="#">Contact us</a>
+                        </li>
+                        <li>
+                          <a href="#">Latest News</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="col-xl-4 col-lg-4 col-md-6 mb-50">
+                    <div className="footer-widget">
+                      <div className="footer-widget-heading">
+                        <h3>Subscribe</h3>
+                      </div>
+                      <div className="footer-text mb-25">
+                        <p>
+                          Don’t miss to subscribe to our new feeds, kindly fill
+                          the form below.
+                        </p>
+                      </div>
+                      <div className="subscribe-form">
+                        <form action="#">
+                          <input type="text" placeholder="Email Address" />
+                          <button>
+                            <i className="fab fa-telegram-plane" />
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="copyright-area text-center">
+              <div className="container">
+                <div className="copyright-text">
+                  <p>
+                    Copyright © 2023, All Right Reserved{" "}
+                    <a href="https://codepen.io/anupkumar92/">Vivek Dev Shah</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </footer>
         </main>
+
+        {/* Footer */}
       </div>
       {/* header */}
       {/* ====================================================================================================================================== */}
-
-      {/* sidebar */}
-      {/* ============================================================================================================================================ */}
-
-      {/* ================================================================================================================================================================ */}
-
-      {/* ================================================================================================================================================================ */}
-      {/* <div className="layout">
-        <div className="header">
-              <div className="header-content" style={{ cursor: "pointer" }}>
-                <Badge
-                  count={user ? user.Notification.length : 0}
-                  onClick={() => {
-                    Navigate("/notification");
-                  }}
-                >
-                  <i className="ri-notification-3-line"></i>
-                </Badge>
-
-                <Link to="/profile">{user ? user.name : ""}</Link>
-              </div>
-        </div>
-          
-          <div className="content">
-            
-          <div className="sidebar">
-            <div className="logo">
-              <h6>WellBeing</h6>
-              <hr />
-            </div>
-
-            <div className="menu">
-              {sidebarMenu &&
-                sidebarMenu.map((menu) => {
-                  const isActive = location.pathname === menu.path;
-                  return (
-                    <div
-                      className={`menu-item ${isActive && "active"}`}
-                      key={menu.path}
-                    >
-                      <i className={menu.icon}></i>
-                      <Link to={menu.path}>{menu.name}</Link>
-                    </div>
-                  );
-                })}
-              <div className="menu-item" onClick={handleLogout}>
-                <i className="ri-logout-box-r-line"></i>
-                <Link to="/login">Logout</Link>
-              </div>
-            </div>
-          </div>
-
-            <div className="body">{children}</div>
-          </div>
-        </div> */}
     </>
   );
 };

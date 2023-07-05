@@ -10,7 +10,7 @@ const HospitalList = ({ hospital }) => {
         <div className="card-header">
            {hospital.name}
         </div>
-        <div className="card-body">
+        <div className="card-body"> 
           <p>
             <b>Specialization</b> {hospital.specialization}
           </p>

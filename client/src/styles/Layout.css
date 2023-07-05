@@ -60,6 +60,23 @@
   transform: translateY(100%);
 }
 
+nav.style-4 .menu-4 li:first-child img {
+  width: 120px; /* Adjust the width as per your requirements */
+  height: auto;
+  margin-right: 5px; /* Add some spacing between the logo and the text */
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: top 0.3s;
+  z-index: 2;
+}
+
+
+
 /* Responsive styles */
 
 /* @media screen and (max-width: 768px) {
@@ -96,7 +113,7 @@ body{
   top: 0;
   left: -100%;
   width: 300px;
-  height: 100vh;
+  min-height: 60%;
   background: #ecf0f3;
   padding: 12px;
   box-shadow: -3px -3px 7px #ffffff,
@@ -196,9 +213,9 @@ body{
 }
 .myBar label{
   font-size: 17px;
-  color: #31344b;
-  box-shadow: -3px -3px 5px #ffffff,
-             2px 2px 3px #ffffff;
+  color: #0a0a0c;
+  box-shadow: -3px -3px 7px #969696,
+             3px 3px 5x #b1afaf;
   height: 37px;
   width: 37px;
   border-radius: 50%;
@@ -207,8 +224,8 @@ body{
   transition: all 0.3s ease;
 }
 .myBar label:hover{
-  box-shadow: inset -3px -3px 7px #ffffff,
-              inset 3px 3px 5px #ffffff;
+  box-shadow: inset -3px -3px 7px #b9b9b9,
+              inset 3px 3px 5px #b9b9b9;
   color: #3498db;
 }
 #check{

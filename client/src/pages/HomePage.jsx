@@ -55,7 +55,7 @@ const HomePage = () => {
             <div className="col banner-title">
               <h1>
                 Your <span style={{ color: "#00cc00" }}>Health</span>, our{" "}
-                <span style={{ color: "#ff6600" }}>Priority</span>. Book your{" "}
+                <span style={{ color: "#ff5e14" }}>Priority</span>. Book your{" "}
                 <span style={{ color: "#4d4dff" }}>Appointment</span> Today!
               </h1>
             </div>
@@ -68,14 +68,14 @@ const HomePage = () => {
 
       <section classname="info">
         <div id="top">
-          {/* <header className="ribbon-container">
+          <header className="ribbon-container">
             <h2 className="ribbon">
               <a className="ribbon-content">By Gerard Manley Hopkins</a>
             </h2>
-          </header> */}
+          </header>
         </div>
         <div id="bottom">
-          {/* <header className="ribbon-container">
+          <header className="ribbon-container">
             <h1 />
             <h2 className="ribbon">
               <a className="ribbon-content">Ribbon Overlay</a>
@@ -83,27 +83,35 @@ const HomePage = () => {
             <div className="underpage">
               <p></p>
             </div>
-          </header> */}
+          </header>
         </div>
       </section>
 
       <section id="Doctors-list">
         <div className="container mb-5 mt-5" >
-        <h1 className="text-center">Doctors</h1>
-        <Row>
+        <header className="ribbon-container">
+            <h2 className="ribbon">
+              <a className="ribbon-content">List of Doctors</a>
+            </h2>
+          </header>
+        <div className="row mt-3">
           {doctors &&
             doctors.map((doctor, index) => <div className="col"> <DoctorList doctor={doctor} /> </div> )}
-        </Row>
+        </div>
         </div>
       </section>
 
       <section id="Hospitals-list">
       <div className="container mb-5 mt-5" >
-        <h1 className="text-center">Hopitals</h1>
-        <Row>
+        <header className="ribbon-container">
+            <h2 className="ribbon">
+              <a className="ribbon-content">List of Hospitals</a>
+            </h2>
+          </header>
+        <div className="row mt-3">
           {hospitals &&
-            hospitals.map((hospital, index) => <div className="col"> <HospitalList hospital={hospital} /> </div> )}
-        </Row>
+            hospitals.map((hospital, index) => <div className="col"><HospitalList hospital={hospital} /></div>  )}
+        </div>
         </div>
       </section>
     </Layout>

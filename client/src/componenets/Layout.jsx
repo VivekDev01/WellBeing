@@ -1,10 +1,11 @@
-import React, { children, useState } from "react";
+import React, { children, useState, useRef, useEffect } from "react";
 import "../styles/Layout.css";
 import { adminMenu, userMenu } from "../Data/data";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { message, Badge, notification } from "antd";
-import logo from "../images/logo-wellbeing.png"
+import logo from "../images/logo-wellbeing.png";
+import logo2 from "../images/logo-wellbeing2.png";
 
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.user);
@@ -12,6 +13,28 @@ const Layout = ({ children }) => {
   const Navigate = useNavigate();
 
   const [showSidebar, setShowSidebar] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    let prevScrollPos = window.pageYOffset;
+
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+
+      if (prevScrollPos > currentScrollPos) {
+        headerRef.current.style.top = "0";
+      } else {
+        headerRef.current.style.top = `-${headerRef.current.offsetHeight}px`;
+      }
+
+      prevScrollPos = currentScrollPos;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -86,21 +109,24 @@ const Layout = ({ children }) => {
         {/* Header */}
         <div>
           <header
+            ref={headerRef}
             id="header"
             style={{
-              position: "fixed",
+              // position: "fixed",
               top: 0,
               left: 0,
               right: 0,
               maxHeight: "50px",
               backgroundColor: "#ecf0f3",
-              zIndex: "1",
             }}
           >
             <div className="container">
               {/* Header content */}
               <nav class="style-4">
                 <ul class="menu-4">
+                  <li style={{ margin: 0, float: "left", display: "inline" }}>
+                    <img src={logo2} width="10%" alt="logo" />
+                  </li>
                   <li className="myBar" style={{ float: "left" }}>
                     <input type="checkbox" onClick={toggleSidebar} id="check" />
                     <label className="button bars" htmlFor="check">
@@ -173,7 +199,7 @@ const Layout = ({ children }) => {
               left: 0,
               width: 0,
               backgroundColor: "lightgray",
-              height: "100%",
+              height: "70%",
             }}
           >
             {/* Sidebar content */}
@@ -241,7 +267,8 @@ const Layout = ({ children }) => {
 
         {/* Main Content */}
         <main
-          style={{ marginLeft: showSidebar ? "300px" : 0, marginTop: "50px" }}
+          // style={{ marginLeft: showSidebar ? "300px" : 0, marginTop: "50px" }}
+          style={{ marginTop: visible ? "50px" : 0 }}
         >
           {/* Main content */}
           <div className="children-area">
@@ -286,12 +313,8 @@ const Layout = ({ children }) => {
                   <div className="col-xl-4 col-lg-4 mb-50">
                     <div className="footer-widget">
                       <div className="footer-logo">
-                        <a href="index.html">
-                          <img
-                            src={logo}
-                            className="img-fluid"
-                            alt="logo"
-                          />
+                        <a href="/">
+                          <img src={logo} className="img-fluid" alt="logo" />
                         </a>
                       </div>
                       <div className="footer-text">

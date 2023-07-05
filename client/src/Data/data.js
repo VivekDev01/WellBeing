@@ -25,7 +25,7 @@ export const userMenu =  [
         icon:'fa-solid fa-user-doctor'
     },
    
-]
+] 
 
 export const adminMenu =  [
     {

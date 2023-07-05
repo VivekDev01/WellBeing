@@ -9,13 +9,17 @@ import ProtectedRoute from "./componenets/ProtectedRoute.jsx";
 import PublicRoute from "./componenets/PublicRoute.jsx";
 import ApplyDoctor from "./pages/ApplyDoctor";
 import NotificationPage from "./pages/NotificationPage";
-import Docters from "./pages/admin/Doctors";
+import Doctors from "./pages/admin/Doctors";
 import Hospitals from "./pages/admin/Hospitals";
 import Users from "./pages/admin/Users";
 import Profile from "./pages/doctor/Profile";
 import BookingPage from "./pages/BookingPage";
 import Appointments from "./pages/Appointments";
 import DoctorAppointments from "./pages/doctor/DoctorAppointments";
+import ApplyHospital from "./pages/ApplyHospital";
+import HospitalProfile from "./pages/hospital/HospitalProfile";
+import BookingPageHospital from "./pages/BookingPageHospital";
+import HospitalAppointments from "./pages/hospital/HospitalAppointments";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -44,20 +48,34 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
+            <Route
+              path="/apply-hospital"
+              element={
+                <ProtectedRoute>
+                  <ApplyHospital />
+                </ProtectedRoute>
+              }
+            />
+
             <Route
               path="/admin/doctors"
               element={
                 <ProtectedRoute>
-                  <Docters />
+                  <Doctors />
                 </ProtectedRoute>
               }
             />
-            {/* <Route path="/admin/hospitals" 
+
+            <Route
+              path="/admin/hospitals"
               element={
                 <ProtectedRoute>
-                  <Hospitals/>
+                  <Hospitals />
                 </ProtectedRoute>
-              }/> */}
+              }
+            />
+
             <Route
               path="/admin/users"
               element={
@@ -77,10 +95,28 @@ function App() {
             />
 
             <Route
+              path="/hospital/profile/:id"
+              element={
+                <ProtectedRoute>
+                  <HospitalProfile />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
               path="/doctor/book-appointment/:doctorId"
               element={
                 <ProtectedRoute>
                   <BookingPage />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/hospital/book-appointment/:hospitalId"
+              element={
+                <ProtectedRoute>
+                  <BookingPageHospital />
                 </ProtectedRoute>
               }
             />
@@ -125,6 +161,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <DoctorAppointments />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/hospital-appointments"
+              element={
+                <ProtectedRoute>
+                  <HospitalAppointments />
                 </ProtectedRoute>
               }
             />

@@ -4,7 +4,7 @@ const hospitalSchema= new mongoose.Schema({
     userId:{
         type: String
     },
-    Name:{
+    name:{
         type:String,
         required: [true, "First name is required"]
     },
@@ -38,6 +38,8 @@ const hospitalSchema= new mongoose.Schema({
 
 }, {timestamps:true});
 //timestamps: true ----> to capture all the time
+
+console.log(mongoose.modelNames());
 
 const hospitalModel= mongoose.model('hospitals', hospitalSchema)
 

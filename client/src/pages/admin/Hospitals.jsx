@@ -26,7 +26,7 @@ const Hospitals = () => {
 
   const handleAccountStatus= async(record, status) =>{
     try {
-      const res = await axios.post('/api/v1/admin/changeAccountStatus', {hospitalId: record._id, userId:record.userId, status:status},{
+      const res = await axios.post('/api/v1/admin/changeHospitalAccountStatus', {hospitalId: record._id, userId:record.userId, status:status},{
         headers:{
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }

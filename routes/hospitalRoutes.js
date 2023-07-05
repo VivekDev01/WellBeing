@@ -22,4 +22,4 @@ hospitalRouter.get('/hospital-appointments', authMiddleware, hospitalAppointment
 //POST || Update Appointment Status
 hospitalRouter.post('/update-status', authMiddleware, updateHospitalStatusController)
 
-export default hospitalRouter;
+export default hospitalRouter; 

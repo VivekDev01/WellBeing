@@ -1,6 +1,6 @@
-import hospitalModel from "../models/HospitalModel.js"
 import appointmentModel from "../models/appointmentModel.js"
 import userModel from "../models/userModel.js"
+import hospitalModel from "../models/hospitalModel.js"
 
 const getHospitalInfoController= async(req, res) => {
     try {

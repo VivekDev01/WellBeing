@@ -42,6 +42,11 @@ const Users = () => {
       render: (text, record) => <span>{record.isDoctor ? "Yes" : "No"}</span>,
     },
     {
+      title: "Hospital",
+      dataIndex: "isHospital",
+      render: (text, record) => <span>{record.isHospital ? "Yes" : "No"}</span>,
+    },
+    {
       title: "Actions",
       dataIndex: "actions",
       render: (text, record) => (

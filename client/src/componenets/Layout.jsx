@@ -49,7 +49,25 @@ const Layout = ({ children }) => {
     },
   ];
 
-  // ==========Doctor menu ==============
+  // ==========Hospital menu ==============
+  const hospitalMenu = [
+    {
+      name: "Home",
+      path: "/",
+      icon: "ri-home-heart-line",
+    },
+    {
+      name: "Appointments",
+      path: "/hospital-appointments",
+      icon: "ri-list-check",
+    },
+    {
+      name: "Profile",
+      path: `/hospital/profile/${user._id}`,
+      icon: "fa-solid fa-user-doctor",
+    },
+  ];
+
 
   //rendering menu list
 
@@ -58,6 +76,8 @@ const Layout = ({ children }) => {
     ? adminMenu
     : user.isDoctor
     ? doctorMenu
+    : user.isHospital
+    ? hospitalMenu
     : userMenu;
 
   return (
@@ -96,7 +116,7 @@ const Layout = ({ children }) => {
                     </a>
                   </li>
                   <li>
-                    <a href="#Hospital-menu" data-hover="Hospitals">
+                    <a href="#Hospitals-list" data-hover="Hospitals">
                       Hospitals
                     </a>
                   </li>

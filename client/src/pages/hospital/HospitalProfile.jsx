@@ -9,19 +9,19 @@ import moment from "moment"
 
 const Profile = () => {
   const {user} = useSelector(state=>state.user)
-  const [doctor, setDoctor] = useState(null);
+  const [hospital, setHospital] = useState(null);
   const params = useParams()
   const dispatch = useDispatch() 
   const navigate = useNavigate()
 
   
 
-  //===========update doctor==================
+  //===========update hospital==================
   
   const handleFinish=async (values)=>{
     try {
         dispatch(showLoading())
-        const res= await axios.post("/api/v1/doctor/updateProfile", {...values, userId:user._id, 
+        const res= await axios.post("/api/v1/hospital/updateHospitalProfile", {...values, userId:user._id, 
             timing:[
                 moment(values.timing[0]).format("HH:mm"),
                 moment(values.timing[1]).format("HH:mm")
@@ -43,22 +43,22 @@ const Profile = () => {
     } catch (error) {
         dispatch(hideLoading())
         console.log(error);
-        message.error("Something went wrong")
+        message.error("Something went wrong in updating hospital profile")
     }
 }
 
 
-  //get doctor details
-  const getDoctorInfo = async() => {
+  //get hospital details
+  const getHospitalInfo = async() => {
     try {
-      const res = await axios.post('/api/v1/doctor/getDoctorInfo', {userId:params.id}, 
+      const res = await axios.post('/api/v1/hospital/getHospitalInfo', {userId:params.id}, 
       {
         headers:{
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       })
       if(res.data.success){
-        setDoctor(res.data.data)
+        setHospital(res.data.data)
       }
     } catch (error) {
       console.log(error)
@@ -66,7 +66,7 @@ const Profile = () => {
   }
 
   useEffect(()=>{
-    getDoctorInfo()
+    getHospitalInfo()
     // eslint-disable-next-line
   }, [])
 
@@ -74,26 +74,22 @@ const Profile = () => {
     <Layout>
         <h1>Manage Profile</h1>
         {
-          doctor && 
+          hospital && 
           <Form layout='vertical' onFinish={handleFinish} className='m-3' initialValues={{
-            ...doctor, 
+            ...hospital, 
             timing:[
-                moment(doctor.timing[0], "HH:mm"),
-                moment(doctor.timing[1], "HH:mm")
+                moment(hospital.timing[0], "HH:mm"),
+                moment(hospital.timing[1], "HH:mm")
             ]
           }}>
             <h4>Personal Details: </h4>
             <Row  gutter={20}>
                 <Col xs={24} md={24} lg={8}>
-                    <Form.Item label="First Name" name="firstName" required rules={[{required:true}]}>
-                        <Input type='text' placeholder='Your first name'/>
+                    <Form.Item label="Hospital Name" name="name" required rules={[{required:true}]}>
+                        <Input type='text' placeholder="Your Hospital's name"/>
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={24} lg={8}>
-                    <Form.Item label="Last Name" name="lastName" required rules={[{required:true}]}>
-                        <Input type='text' />
-                    </Form.Item>
-                </Col>
+               
                 <Col xs={24} md={24} lg={8}>
                     <Form.Item label="Phone" name="phone" required rules={[{required:true}]}>
                         <Input type='text' />
@@ -105,7 +101,7 @@ const Profile = () => {
                     </Form.Item>
                 </Col>
             </Row>
-            <h4>Personal Details: </h4>
+            <h4>Other Details: </h4>
             <Row  gutter={20}>
                 <Col xs={24} md={24} lg={8}>
                     <Form.Item label="Website Link" name="website" >
@@ -113,25 +109,16 @@ const Profile = () => {
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={24} lg={8}>
-                    <Form.Item label="Clinic Address" name="address" required rules={[{required:true}]}>
+                    <Form.Item label="Hospital Address" name="address" required rules={[{required:true}]}>
                         <Input type='text' />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={24} lg={8}>
-                    <Form.Item label="Specialization" name="specialization" required rules={[{required:true}]}>
+                    <Form.Item label="Specializations" name="specialization" required rules={[{required:true}]}>
                         <Input type='text' />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={24} lg={8}>
-                    <Form.Item label="Experience Years" name="experience" required rules={[{required:true}]}>
-                        <Input type='text' />
-                    </Form.Item>
-                </Col>
-                <Col xs={24} md={24} lg={8}>
-                    <Form.Item label="Fees per Consultation" name="feesPerConsultation" required rules={[{required:true}]}>
-                        <Input type='number' />
-                    </Form.Item>
-                </Col>
+                
                 <Col xs={24} md={24} lg={8}>
                     <Form.Item label="Timing" name="timing" required rules={[{required:true}]}>
                         <TimePicker.RangePicker format={"HH:mm"}/>

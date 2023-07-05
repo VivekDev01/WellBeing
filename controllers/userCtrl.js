@@ -5,6 +5,7 @@ import doctorModel from "../models/doctorModel.js"
 import appointmentModel from "../models/appointmentModel.js"
 import moment from "moment";
 import hospitalModel from "../models/hospitalModel.js";
+import hospitalAppointmentModel from "../models/hospitalAppointmentModel.js";
 
 //register callback
 const registerController= async(req, res)=>{
@@ -264,13 +265,13 @@ const bookHospitalAppointmentController = async(req, res) => {
         req.body.date = moment(req.body.date, 'DD-MM-YYYY').toISOString();
         req.body.time = moment(req.body.time, 'HH:mm').toISOString();
         req.body.status = "pending"
-        const newAppointment = new appointmentModel(req.body)
+        const newAppointment = new hospitalAppointmentModel(req.body)
         await newAppointment.save()
         const user= await userModel.findOne({_id: req.body.hospitalInfo.userId})
         user.Notification.push({
-            type:"New-Appointment-Request",
+            type:"New-Hospital-Appointment-Request",
             message: `You have a new Appointment Request from ${req.body.userInfo.name}`,
-            onclickPath:'/user/appointments'
+            onclickPath:'/user/appointments' 
         })
         await user.save()
         res.status(200).send({
@@ -281,7 +282,7 @@ const bookHospitalAppointmentController = async(req, res) => {
         console.log(error)
         res.status(500).send({
             success:false,
-            message: "Error while booking appointment",
+            message: "Error while booking hospital appointment",
             error
         })
     }
@@ -322,7 +323,7 @@ const bookingHospitalAvailabilityController = async(req, res) => {
         const fromTime=moment(req.body.time, 'HH:mm').subtract(1, 'hours').toISOString(); 
         const toTime=moment(req.body.time, 'HH:mm').add(1, 'hours').toISOString(); 
         const hospitalId= req.body.hospitalId;
-        const appointments = await appointmentModel.find({hospitalId, date, time:{$gte:fromTime, $lte:toTime}})
+        const appointments = await hospitalAppointmentModel.find({hospitalId, date, time:{$gte:fromTime, $lte:toTime}})
         if(appointments.length>0){
             return res.status(200).send({
                 success:true,
@@ -349,10 +350,12 @@ const bookingHospitalAvailabilityController = async(req, res) => {
 const userAppointmentsController = async(req, res) => {
     try {
         const appointments= await appointmentModel.find({userId: req.body.userId})
+        const hospitalAppointments= await hospitalAppointmentModel.find({userId: req.body.userId})
+        const mergedAppointments = [...appointments, ...hospitalAppointments];
         res.status(200).send({
             success:true,
             message: "User Appointments fetched Successfully",
-            data: appointments
+            data: mergedAppointments
         })
     } catch (error) {
         console.log(error);

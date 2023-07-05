@@ -44,9 +44,9 @@ const BookingPageHospital = () => {
       }
       dispatch(showLoading());
       const res = await axios.post(
-        "/api/v1/user/book-appointment",
+        "/api/v1/user/book-hospital-appointment",
         {
-            hospitalId: params.hospitalId,
+          hospitalId: params.hospitalId,
           userId: user._id,
           hospitalInfo: hospitals,
           date: date,
@@ -73,7 +73,7 @@ const BookingPageHospital = () => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "/api/v1/user/booking-availability",
+        "/api/v1/user//booking-hospital-availability",
         { hospitalId: params.hospitalId, date, time },
         {
           headers: {

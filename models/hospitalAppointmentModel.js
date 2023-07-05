@@ -1,16 +1,17 @@
 import mongoose from "mongoose";
 
-const appointmentSchema = new mongoose.Schema({
+const hospitalAppointmentSchema = new mongoose.Schema({
     userId:{
         type: String,
         required: true
     },
-    doctorId:{
+    
+    hospitalId:{
         type: String,
         required: true
-    },  
-    doctorInfo:{
-        type:String, 
+    },
+    hospitalInfo:{
+        type: String,
         required: true
     },
     userInfo:{
@@ -34,6 +35,6 @@ const appointmentSchema = new mongoose.Schema({
     timestamps: true
 })
 
-const appointmentModel = mongoose.model("appointments", appointmentSchema);
+const hospitalAppointmentModel = mongoose.model("hospital-appointments", hospitalAppointmentSchema);
 
-export default appointmentModel;
+export default hospitalAppointmentModel;

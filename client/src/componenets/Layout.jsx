@@ -4,6 +4,7 @@ import { adminMenu, userMenu } from "../Data/data";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { message, Badge, notification } from "antd";
+import logo from "../images/logo-wellbeing.png"
 
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.user);
@@ -68,7 +69,6 @@ const Layout = ({ children }) => {
     },
   ];
 
-
   //rendering menu list
 
   // console.log(user.isAdmin);
@@ -94,12 +94,20 @@ const Layout = ({ children }) => {
               right: 0,
               maxHeight: "50px",
               backgroundColor: "#ecf0f3",
+              zIndex: "1",
             }}
           >
             <div className="container">
               {/* Header content */}
               <nav class="style-4">
                 <ul class="menu-4">
+                  <li className="myBar" style={{ float: "left" }}>
+                    <input type="checkbox" onClick={toggleSidebar} id="check" />
+                    <label className="button bars" htmlFor="check">
+                      <i className="fas fa-bars" />
+                    </label>
+                  </li>
+
                   <li>
                     <a href="/" data-hover="Home">
                       Home
@@ -148,13 +156,6 @@ const Layout = ({ children }) => {
                     >
                       <i className="fa-solid fa-bell fa-lg mt-3"></i>
                     </Badge>
-                  </li>
-
-                  <li className="myBar" style={{ float: "left" }}>
-                    <input type="checkbox" onClick={toggleSidebar} id="check" />
-                    <label className="button bars" htmlFor="check">
-                      <i className="fas fa-bars" />
-                    </label>
                   </li>
                 </ul>
               </nav>
@@ -243,7 +244,9 @@ const Layout = ({ children }) => {
           style={{ marginLeft: showSidebar ? "300px" : 0, marginTop: "50px" }}
         >
           {/* Main content */}
-          <div className="children-area">{children}</div>
+          <div className="children-area">
+            <div className="container">{children}</div>
+          </div>
 
           <footer id="footer" className="footer-section">
             <div className="container">
@@ -285,7 +288,7 @@ const Layout = ({ children }) => {
                       <div className="footer-logo">
                         <a href="index.html">
                           <img
-                            src="https://i.ibb.co/QDy827D/ak-logo.png"
+                            src={logo}
                             className="img-fluid"
                             alt="logo"
                           />

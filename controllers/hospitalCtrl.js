@@ -1,6 +1,6 @@
-import appointmentModel from "../models/appointmentModel.js"
 import userModel from "../models/userModel.js"
 import hospitalModel from "../models/hospitalModel.js"
+import hospitalAppointmentModel from "../models/hospitalAppointmentModel.js"
 
 const getHospitalInfoController= async(req, res) => {
     try {
@@ -62,7 +62,7 @@ const getHospitalByIdController = async(req, res) => {
 const hospitalAppointmentsController = async(req, res) => {
     try {
         const hospital = await hospitalModel.findOne({userId: req.body.userId})
-        const appointments = await appointmentModel.find({hospitalId: hospital._id})
+        const appointments = await hospitalAppointmentModel.find({hospitalId: hospital._id})
         
         res.status(200).send({
             success:true,
@@ -83,7 +83,7 @@ const hospitalAppointmentsController = async(req, res) => {
 const updateHospitalStatusController = async(req, res) => {
     try {
         const {appointmentsId, status} = req.body
-        const appointments = await appointmentModel.findByIdAndUpdate(appointmentsId, {status})
+        const appointments = await hospitalAppointmentModel.findByIdAndUpdate(appointmentsId, {status})
         const user= await userModel.findOne({_id: appointments.userId})
         const Notification= user.Notification
         Notification.push({

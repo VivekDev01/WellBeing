@@ -504,3 +504,19 @@ color: #ff5e14;
 } */
 
 
+.scroll-to-top {
+  width: 3%;
+  position: fixed;
+  bottom: 10%;
+  right: 4%;
+  transform: translateX(50%);
+  z-index: 9999;
+  cursor: pointer;
+  border-radius: 4px;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-to-top:hover {
+  opacity: 1;
+}

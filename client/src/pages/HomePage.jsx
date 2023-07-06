@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Layout from "../componenets/Layout";
-import { Row } from "antd";
 import DoctorList from "../componenets/DoctorList";
 import HospitalList from "../componenets/HopitalList";
 import "../styles/HomePage.css";
@@ -51,6 +50,10 @@ const HomePage = () => {
     getHospitalsData();
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <Layout>
       <section id="banner">
@@ -75,7 +78,10 @@ const HomePage = () => {
           <div className="col">
             <img className="circular-image" src={info4} alt="" />
             <h3>Book Appointment</h3>
-            <p>You can book your appointment to any of doctors and hospitals listed below</p>
+            <p>
+              You can book your appointment to any of doctors and hospitals
+              listed below
+            </p>
           </div>
           <div className="col">
             <img className="circular-image" src={info1} alt="" />
@@ -85,7 +91,10 @@ const HomePage = () => {
           <div className="col">
             <img className="circular-image" src={info2} alt="" />
             <h3>Apply as a Hospital</h3>
-            <p>Hospitals Administration can register themselves by applying as a Hospital</p>
+            <p>
+              Hospitals Administration can register themselves by applying as a
+              Hospital
+            </p>
           </div>
         </div>
       </section>

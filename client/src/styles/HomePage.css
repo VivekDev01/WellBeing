@@ -4,12 +4,12 @@
 #banner h1{
     margin-top: 30px;
     font-size: 80px;
-    text-align: left;
+    text-align: center;
     line-height: 1.5;
     white-space: pre-line;
 }
 #banner img{
-  text-align: right;
+  text-align: center;
   width: 90%;
 }
 @media (max-width: 768px) {

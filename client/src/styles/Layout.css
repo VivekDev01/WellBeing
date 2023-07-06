@@ -20,7 +20,7 @@
 }
 
 .menu-4 a {
-  padding: 0.3em 0;
+  padding: 1em 0;
   color: #212121;
   position: relative;
   display: inline-block;
@@ -61,6 +61,7 @@
 }
 
 nav.style-4 .menu-4 li:first-child img {
+  padding: 0.8em 0;
   width: 120px; /* Adjust the width as per your requirements */
   height: auto;
   margin-right: 5px; /* Add some spacing between the logo and the text */
@@ -74,6 +75,22 @@ header {
   transition: top 0.3s;
   z-index: 2;
 }
+
+ header nav ul li.last-li {
+  padding: 1em 1em;
+
+} 
+/*
+header nav ul li.last-li:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 3px;
+  background-color: yellow; Adjust the background color as needed */
+  /* bottom: -3px;
+  left: 0;
+} */ 
+
 
 
 
@@ -233,7 +250,7 @@ body{
 }
 .bars{
   position: relative;
-  top: 6px;
+  top: 10px;
 }
 #check:checked ~ .side_bar{
   left: 0;
@@ -245,6 +262,7 @@ body{
 
 
 .children-area{
+  margin: 100px auto 50px auto;
   min-height: 80vh;
 }
 

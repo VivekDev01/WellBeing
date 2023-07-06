@@ -65,7 +65,7 @@ const NotificationPage = () => {
             </div>
             {
               user.Notification.map(notificationMsg =>(
-                <div className="card"  style={{cursor:"pointer"}}>
+                <div className="card m-2"  style={{cursor:"pointer"}}>
                   <div className="card-text" onClick={navigate(notificationMsg.onClickPath)}>
                     {notificationMsg.message}
                   </div>
@@ -75,12 +75,12 @@ const NotificationPage = () => {
           </Tabs.TabPane>
           <Tabs.TabPane tab="Read" key={1}>
             <div className="d-flex justify-content-end">
-              <h4 className='p-2 text-primary' style={{cursor:"pointer"}} onClick={handleDeleteAllRead}>Delete all read</h4>
+              <h4 className='p-2 text-danger' style={{cursor:"pointer"}} onClick={handleDeleteAllRead}> Delete all read</h4>
             </div>
 
             {
               user.seenNotification.map(notificationMsg =>(
-                <div className="card"  style={{cursor:"pointer"}}>
+                <div className="card m-2"  style={{cursor:"pointer"}}>
                   <div className="card-text" onClick={() =>navigate(notificationMsg.onClickPath)}>
                     {notificationMsg.message}
                   </div>

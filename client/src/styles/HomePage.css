@@ -1,15 +1,16 @@
 #banner{
     min-height: 80px;
-    margin-top: 50px;
 }
 #banner h1{
+    margin-top: 30px;
     font-size: 80px;
     text-align: left;
     line-height: 1.5;
     white-space: pre-line;
 }
 #banner img{
-  width: 100%;
+  text-align: right;
+  width: 90%;
 }
 @media (max-width: 768px) {
     #banner h1{
@@ -17,9 +18,7 @@
       line-height: 1.4;
     }
   }
-.banner-title{
-    margin-top: 100px;
-}
+
   
   /* ======================================================================================================================= */
 
@@ -132,3 +131,16 @@
   .underpage p:last-child {
     margin-bottom: 0;
   }
+
+
+  .info{
+    margin: 100px auto 100px auto;
+    text-align: center;
+    background-color: #ecf0f3;
+  }
+
+  .circular-image {
+    margin: 10px auto 10px auto;
+    width: 70%;
+  }
+  

@@ -116,7 +116,7 @@ const Layout = ({ children }) => {
               top: 0,
               left: 0,
               right: 0,
-              maxHeight: "50px",
+              maxHeight: "60px",
               backgroundColor: "#ecf0f3",
             }}
           >
@@ -171,6 +171,7 @@ const Layout = ({ children }) => {
                     </a>
                   </li>
                   <li
+                  className="last-li"
                     style={{ float: "right", cursor: "pointer" }}
                     data-hover="Notification"
                   >
@@ -274,6 +275,7 @@ const Layout = ({ children }) => {
           <div className="children-area">
             <div className="container">{children}</div>
           </div>
+          </main>
 
           <footer id="footer" className="footer-section">
             <div className="container">
@@ -425,7 +427,6 @@ const Layout = ({ children }) => {
               </div>
             </div>
           </footer>
-        </main>
 
         {/* Footer */}
       </div>

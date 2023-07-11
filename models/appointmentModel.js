@@ -18,7 +18,7 @@ const appointmentSchema = new mongoose.Schema({
         required: true
     },
     date:{
-        type: String,
+        type: Date,
         required: true
     },
     status:{
@@ -27,9 +27,10 @@ const appointmentSchema = new mongoose.Schema({
         default: "pending"
     },
     time:{
-        type: String,
-        required: true
-    }
+        type: Date,
+        default: Date.now,
+        required: [true, "Work start timing is required"]
+    },
 },{
     timestamps: true
 })

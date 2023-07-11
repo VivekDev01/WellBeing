@@ -18,6 +18,7 @@ const NotificationPage = () => {
       dispatch(showLoading())
       const res= await axios.post('/api/v1/user/get-all-notification', {userId: user._id}, {headers:{
         Authorization: `Bearer ${localStorage.getItem("token")}`,}})
+        window.location.reload()
       dispatch(hideLoading())
       if(res.data.success){
         message.success(res.data.message)
@@ -40,6 +41,7 @@ const NotificationPage = () => {
           Authorization : `Bearer ${localStorage.getItem("token")}`
         }
       })
+      window.location.reload()
       dispatch(hideLoading())
       if(res.data.success){
         message.success(res.data.message)
@@ -66,7 +68,7 @@ const NotificationPage = () => {
             {
               user.Notification.map(notificationMsg =>(
                 <div className="card m-2"  style={{cursor:"pointer"}}>
-                  <div className="card-text" onClick={navigate(notificationMsg.onClickPath)}>
+                  <div className="card-text" onClick={() =>navigate(notificationMsg.onClickPath)}>
                     {notificationMsg.message}
                   </div>
                 </div>

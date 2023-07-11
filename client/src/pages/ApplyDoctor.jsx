@@ -18,12 +18,14 @@ const ApplyDoctor = () => {
     const handleFinish=async (values)=>{
         try {
             dispatch(showLoading())
-            const res= await axios.post("/api/v1/user/apply-doctor", {...values, userId:user._id , 
-                timing:[
-                    moment(values.timing[0]).format("HH:mm"),
-                    moment(values.timing[1]).format("HH:mm")
-                ],
-            },
+            const res = await axios.post(
+                '/api/v1/user/apply-doctor',
+                {
+                  ...values,
+                  userId: user._id,
+                  timing_start: moment(values.timing_start, 'HH:mm').toDate(), // Format timing_start as Date object
+                  timing_end: moment(values.timing_end, 'HH:mm').toDate(), // Format timing_end as Date object
+                },
             {
                 headers:{
                     Authorization:`Bearer ${localStorage.getItem("token")}`
@@ -99,8 +101,13 @@ const ApplyDoctor = () => {
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={24} lg={8}>
-                    <Form.Item label="Timing" name="timing" required rules={[{required:true}]}>
-                        <TimePicker.RangePicker format={"HH:mm"}/>
+                    <Form.Item label="Start Timing" name="timing_start" required rules={[{required:true}]}>
+                        <Input type='time' />
+                    </Form.Item>
+                </Col>
+                <Col xs={24} md={24} lg={8}>
+                    <Form.Item label="End Timing" name="timing_end" required rules={[{required:true}]}>
+                        <Input type='time' />
                     </Form.Item>
                 </Col>
 

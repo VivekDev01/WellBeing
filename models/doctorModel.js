@@ -39,9 +39,15 @@ const doctorSchema= new mongoose.Schema({
         type: Number,
         require: [true, "Fee detail is required"]
     },
-    timing:{
-        type: Object,
-        required: [true, "Work timing is required"]
+    timing_start:{
+        type: Date,
+        default: Date.now,
+        required: [true, "Work start timing is required"]
+    },
+    timing_end:{
+        type: Date,
+        default: Date.now,
+        required: [true, "Work end timing is required"]
     },
     status:{
         type:String,

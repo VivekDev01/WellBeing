@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../componenets/Layout";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { DatePicker, TimePicker, message } from "antd";
+import { DatePicker, Input, TimePicker, message } from "antd";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
@@ -49,9 +49,9 @@ const BookingPage = () => {
           doctorId: params.doctorId,
           userId: user._id,
           doctorInfo: doctors,
-          date: date,
+          date: moment(date, "DD-MM-YYYY").toDate(),
           userInfo: user,
-          time: time,
+          time: moment(time, "HH:mm").toDate(),
         },
         {
           headers: {
@@ -74,7 +74,11 @@ const BookingPage = () => {
       dispatch(showLoading());
       const res = await axios.post(
         "/api/v1/user/booking-availability",
-        { doctorId: params.doctorId, date, time },
+        {
+          doctorId: params.doctorId,
+          date: moment(date, "DD-MM-YYYY").toDate(),
+          time: moment(time, "HH:mm").toDate(),
+        },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -111,10 +115,14 @@ const BookingPage = () => {
                   Dr. {doctors.firstName} {doctors.lastName}
                 </h4>
                 <h4>Fees: {doctors.feesPerConsultation}</h4>
-                {/* <h4>Timing: {doctors.timing[0]} - {doctors.timing[1]} </h4>  */}
+                <h4>
+                  Timing: {moment(doctors.timing_start).format("HH:mm")} -{" "}
+                  {moment(doctors.timing_end).format("HH:mm")}
+                </h4>
 
                 <div className="d-dlex flex-column w-50">
-                  <DatePicker
+                  <Input
+                    type="date"
                     aria-required="true"
                     className="m-2"
                     format={"DD-MM-YYYY"}
@@ -122,7 +130,8 @@ const BookingPage = () => {
                       setDate(moment(value).format("DD-MM-YYYY"));
                     }}
                   />
-                  <TimePicker
+                  <Input
+                    type="time"
                     className="m-2"
                     onChange={(value) => {
                       setTime(moment(value).format("HH:mm"));

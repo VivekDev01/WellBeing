@@ -12,7 +12,7 @@ const BookingPage = () => {
   const params = useParams();
   const [doctors, setDoctors] = useState([]);
   const [date, setDate] = useState(moment());
-  const [time, setTime] = useState(null);
+  const [time, setTime] = useState(moment());
   const [isAvailable, setIsAvailable] = useState(false);
   const dispatch = useDispatch();
 
@@ -49,7 +49,7 @@ const BookingPage = () => {
         doctorId: params.doctorId,
         userId: user._id,
         doctorInfo: doctors,
-        date: moment(date).format("DD-MM-YYYY"),
+        date: moment(date, "DD-MM-YYYY").format("DD-MM-YYYY"),
         userInfo: user,
         time: moment(time, "HH:mm").format("HH:mm"),
       },
@@ -76,7 +76,7 @@ const handleAvailability = async () => {
       "/api/v1/user/booking-availability",
       {
         doctorId: params.doctorId,
-        date: moment(date).format("DD-MM-YYYY"),
+        date: moment(date, "DD-MM-YYYY").format("DD-MM-YYYY"),
         time: moment(time, "HH:mm").format("HH:mm"),
       },
       {
@@ -126,11 +126,11 @@ const handleAvailability = async () => {
                     type="date"
                     aria-required="true"
                     className="m-2"
-                    format={"DD-MM-YYYY"}
-                    value={date}
+                    value={date ? moment(date, "DD-MM-YYYY") : undefined}
                     onChange={(value) => {
+                      setDate(value ? value.format("DD-MM-YYYY") : null);
                       console.log(value);
-                      setDate(value);
+                      
                     }}
                     allowClear
                   />

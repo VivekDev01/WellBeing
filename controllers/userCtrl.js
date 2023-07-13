@@ -239,24 +239,12 @@ const getAllHospitalsController = async(req, res) => {
 
 const bookAppointmentController = async (req, res) => {
     try {
-      const dateParts = req.body.date.split('-');
-      const timeParts = req.body.time.split(':');
-      
-      const year = parseInt(dateParts[2], 10);
-      const month = parseInt(dateParts[1], 10) - 1; // Month is zero-based
-      const day = parseInt(dateParts[0], 10);
-      
-      const hours = parseInt(timeParts[0], 10);
-      const minutes = parseInt(timeParts[1], 10);
-      
-      req.body.date = new Date(year, month, day);
-      req.body.time = new Date(1970, 0, 1, hours, minutes); // Use a common date for time
-      
-      req.body.status = "pending";
-      
-      const newAppointment = new appointmentModel(req.body);
+      const newAppointment = new appointmentModel({
+        ...req.body,
+        status: req.body.status || "pending",
+      });
       await newAppointment.save();
-      
+  
       const user = await userModel.findOne({ _id: req.body.doctorInfo.userId });
       user.Notification.push({
         type: "New-Appointment-Request",
@@ -264,7 +252,7 @@ const bookAppointmentController = async (req, res) => {
         onclickPath: '/user/appointments'
       });
       await user.save();
-      
+  
       res.status(200).send({
         success: true,
         message: "Appointment Booked Successfully",
@@ -281,7 +269,40 @@ const bookAppointmentController = async (req, res) => {
   
   
   
-  
+const bookingAvailabilityController = async (req, res) => {
+  try {
+    const date = moment(req.body.date, 'DD-MM-YYYY').format("YYYY-MM-DD");
+    const fromTime = moment(req.body.time, 'HH:mm').subtract(1, 'hours').format("HH:mm");
+    const toTime = moment(req.body.time, 'HH:mm').add(1, 'hours').format("HH:mm");
+    const doctorId = req.body.doctorId;
+
+    const appointments = await appointmentModel.find({
+      doctorId,
+      date,
+      time: { $gte: fromTime, $lte: toTime },
+    });
+
+    if (appointments.length > 0) {
+      return res.status(200).send({
+        success: true,
+        message: 'Appointment Not Available at this time',
+      });
+    } else {
+      return res.status(200).send({
+        success: true,
+        message: 'Appointment Available at this time',
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error while checking booking availability',
+      error,
+    });
+  }
+};
+
   
 
   const bookHospitalAppointmentController = async (req, res) => {
@@ -314,38 +335,7 @@ const bookAppointmentController = async (req, res) => {
   };
   
 
-const bookingAvailabilityController = async (req, res) => {
-    try {
-      const date = moment(req.body.date, 'DD-MM-YYYY').toISOString();
-      const fromTime = moment(req.body.time, 'HH:mm').subtract(1, 'hours').toISOString();
-      const toTime = moment(req.body.time, 'HH:mm').add(1, 'hours').toISOString();
-      const doctorId = req.body.doctorId;
-      const appointments = await appointmentModel.find({
-        doctorId,
-        date,
-        timing_start: { $gte: fromTime },
-        timing_end: { $lte: toTime },
-      });
-      if (appointments.length > 0) {
-        return res.status(200).send({
-          success: true,
-          message: 'Appointment Not Available at this time',
-        });
-      } else {
-        return res.status(200).send({
-          success: true,
-          message: 'Appointment Available at this time',
-        });
-      }
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({
-        success: false,
-        message: 'Error while checking booking availability',
-        error,
-      });
-    }
-  };
+
   
 
 const bookingHospitalAvailabilityController = async(req, res) => {

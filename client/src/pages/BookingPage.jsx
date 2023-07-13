@@ -11,8 +11,8 @@ const BookingPage = () => {
   const { user } = useSelector((state) => state.user);
   const params = useParams();
   const [doctors, setDoctors] = useState([]);
-  const [date, setDate] = useState();
-  const [time, setTime] = useState();
+  const [date, setDate] = useState(moment());
+  const [time, setTime] = useState(null);
   const [isAvailable, setIsAvailable] = useState(false);
   const dispatch = useDispatch();
 
@@ -36,67 +36,68 @@ const BookingPage = () => {
     }
   };
 
-  const handleBooking = async () => {
-    try {
-      setIsAvailable(true);
-      if (!date && !time) {
-        return alert("Please select date and time");
-      }
-      dispatch(showLoading());
-      const res = await axios.post(
-        "/api/v1/user/book-appointment",
-        {
-          doctorId: params.doctorId,
-          userId: user._id,
-          doctorInfo: doctors,
-          date: moment(date, "DD-MM-YYYY").toDate(),
-          userInfo: user,
-          time: moment(time, "HH:mm").toDate(),
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      dispatch(hideLoading());
-      if (res.data.success) {
-        message.success(res.data.message);
-      }
-    } catch (error) {
-      dispatch(hideLoading());
-      console.log(error);
+ const handleBooking = async () => {
+  try {
+    setIsAvailable(true);
+    if (!date || !time) {
+      return alert("Please select date and time");
     }
-  };
+    dispatch(showLoading());
+    const res = await axios.post(
+      "/api/v1/user/book-appointment",
+      {
+        doctorId: params.doctorId,
+        userId: user._id,
+        doctorInfo: doctors,
+        date: moment(date).format("DD-MM-YYYY"),
+        userInfo: user,
+        time: moment(time, "HH:mm").format("HH:mm"),
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    dispatch(hideLoading());
+    if (res.data.success) {
+      message.success(res.data.message);
+    }
+  } catch (error) {
+    dispatch(hideLoading());
+    console.log(error);
+  }
+};
 
-  const handleAvailability = async () => {
-    try {
-      dispatch(showLoading());
-      const res = await axios.post(
-        "/api/v1/user/booking-availability",
-        {
-          doctorId: params.doctorId,
-          date: moment(date, "DD-MM-YYYY").toDate(),
-          time: moment(time, "HH:mm").toDate(),
+const handleAvailability = async () => {
+  try {
+    dispatch(showLoading());
+    const res = await axios.post(
+      "/api/v1/user/booking-availability",
+      {
+        doctorId: params.doctorId,
+        date: moment(date).format("DD-MM-YYYY"),
+        time: moment(time, "HH:mm").format("HH:mm"),
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      dispatch(hideLoading());
-      if (res.data.success) {
-        setIsAvailable(true);
-        message.success(res.data.message);
-      } else {
-        message.error(res.data.message);
       }
-    } catch (error) {
-      dispatch(hideLoading());
-      console.log(error);
+    );
+    dispatch(hideLoading());
+    if (res.data.success) {
+      setIsAvailable(true);
+      message.success(res.data.message);
+    } else {
+      message.error(res.data.message);
     }
-  };
+  } catch (error) {
+    dispatch(hideLoading());
+    console.log(error);
+  }
+};
+
 
   useEffect(() => {
     getUserData();
@@ -121,22 +122,30 @@ const BookingPage = () => {
                 </h4>
 
                 <div className="d-dlex flex-column w-50">
-                  <Input
+                  <DatePicker
                     type="date"
                     aria-required="true"
                     className="m-2"
                     format={"DD-MM-YYYY"}
+                    value={date}
                     onChange={(value) => {
-                      setDate(moment(value).format("DD-MM-YYYY"));
+                      console.log(value);
+                      setDate(value);
                     }}
+                    allowClear
                   />
-                  <Input
+
+                  <TimePicker
                     type="time"
                     className="m-2"
+                    value={time ? moment(time, "HH:mm") : undefined}
                     onChange={(value) => {
-                      setTime(moment(value).format("HH:mm"));
-                    }}
+                      setTime(value ? value.format("HH:mm") : null);
+                      console.log(value);
+                    }
+                  }
                   />
+
                   <button
                     className="btn btn-primary m-2"
                     onClick={handleAvailability}

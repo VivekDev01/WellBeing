@@ -52,34 +52,36 @@ const DoctorAppointments = () => {
       title: "ID",
       dataIndex: "_id",
     },
-    // {
-    //     title:'Name',
-    //     dataIndex:'name',
-    //     render:(text,record)=>(
-    //         <span>
-    //             {record.doctorId.firstName} {record.doctorId.lastName}
-    //         </span>
-    //     )
-    // },
-    // {
-    //     title:'Phone',
-    //     dataIndex:'phone',
-    //     render:(text,record)=>(
-    //         <span>
-    //             {record.doctorId.phone}
-    //         </span>
-    //     )
-    // },
+    {
+        title:'Name',
+        dataIndex:'name',
+        render:(text,record)=>(
+            <span>
+                {record.doctorId.firstName} {record.doctorId.lastName}
+            </span>
+        )
+    },
+    {
+        title:'Phone',
+        dataIndex:'phone',
+        render:(text,record)=>(
+            <span>
+                {record.doctorId.phone}
+            </span>
+        )
+    },
     {
       title: "Date & Time",
       dataIndex: "date",
       render: (text, record) => (
         <span>
-          {moment(record.date).format("DD-MM-YYYY")} &nbsp;
-          {moment(record.time).format("HH:mm")}
+          {moment(record.date, "DD-MM-YYYY").format("DD-MM-YYYY")} &nbsp;
+          {moment(record.time, "HH:mm").format("HH:mm")}
         </span>
       ),
     },
+    
+    
     {
       title: "Status",
       dataIndex: "status",

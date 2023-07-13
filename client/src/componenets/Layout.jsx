@@ -20,27 +20,30 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
-
+  
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
-
-      if (prevScrollPos > currentScrollPos) {
-        headerRef.current.style.top = "0";
-      } else {
-        headerRef.current.style.top = `-${headerRef.current.offsetHeight}px`;
+  
+      if (headerRef.current) {
+        if (prevScrollPos > currentScrollPos) {
+          headerRef.current.style.top = "0";
+        } else {
+          headerRef.current.style.top = `-${headerRef.current.offsetHeight}px`;
+        }
       }
       prevScrollPos = currentScrollPos;
-
+  
       if (currentScrollPos > 200) {
         setShowScrollButton(true);
       } else {
         setShowScrollButton(false);
       }
     };
-
+  
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

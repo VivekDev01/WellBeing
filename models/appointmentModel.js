@@ -1,37 +1,38 @@
 import mongoose from "mongoose";
 
 const appointmentSchema = new mongoose.Schema({
-    userId:{
+    userId: {
         type: String,
         required: true
     },
-    doctorId:{
+    doctorId: {
         type: String,
         required: true
-    },  
-    doctorInfo:{
-        type:String, 
+    },
+    doctorInfo: {
+        type: String,
         required: true
     },
-    userInfo:{
-        type:String,
+    userInfo: {
+        type: String,
         required: true
     },
-    date:{
-        type: Date,
+    date: {
+        type: String,
+        default: Date.now(), 
         required: true
     },
-    status:{
+    status: {
         type: String,
         required: true,
         default: "pending"
     },
-    time:{
-        type: Date,
-        default: Date.now,
-        required: [true, "Work start timing is required"]
+    time: {
+        type: String,
+        default: Date.now(), 
+        required: true
     },
-},{
+}, {
     timestamps: true
 })
 

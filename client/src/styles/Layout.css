@@ -132,12 +132,14 @@ body{
   width: 300px;
   min-height: 60%;
   background: #ecf0f3;
+  background-color:#ecf0f3 ;
   padding: 12px;
   box-shadow: -3px -3px 7px #ffffff,
              3px 3px 5px #ceced1,
              inset -3px -3px 7px #ffffff,
              inset 3px 3px 5px #ceced1;
  transition: all 0.3s ease;
+ z-index: 10;
 }
 
 .sidebar.active{
@@ -264,6 +266,7 @@ body{
 .children-area{
   margin: 100px auto 50px auto;
   min-height: 80vh;
+  z-index: 0;
 }
 
 /* footer */

@@ -16,7 +16,7 @@ const BookingPage = () => {
   const [isAvailable, setIsAvailable] = useState(false);
   const dispatch = useDispatch();
 
-  //login user data
+  // login user data
   const getUserData = async () => {
     try {
       const res = await axios.post(
@@ -36,73 +36,70 @@ const BookingPage = () => {
     }
   };
 
- const handleBooking = async () => {
-  try {
-    setIsAvailable(true);
-    if (!date || !time) {
-      return alert("Please select date and time");
-    }
-    dispatch(showLoading());
-    const res = await axios.post(
-      "/api/v1/user/book-appointment",
-      {
-        doctorId: params.doctorId,
-        userId: user._id,
-        doctorInfo: doctors,
-        date: moment(date, "DD-MM-YYYY").format("DD-MM-YYYY"),
-        userInfo: user,
-        time: moment(time, "HH:mm").format("HH:mm"),
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+  const handleBooking = async () => {
+    try {
+      if (!date || !time) {
+        return alert("Please select date and time");
       }
-    );
-    dispatch(hideLoading());
-    if (res.data.success) {
-      message.success(res.data.message);
-    }
-  } catch (error) {
-    dispatch(hideLoading());
-    console.log(error);
-  }
-};
-
-const handleAvailability = async () => {
-  try {
-    dispatch(showLoading());
-    const res = await axios.post(
-      "/api/v1/user/booking-availability",
-      {
-        doctorId: params.doctorId,
-        date: moment(date, "DD-MM-YYYY").format("DD-MM-YYYY"),
-        time: moment(time, "HH:mm").format("HH:mm"),
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+      dispatch(showLoading());
+      const res = await axios.post(
+        "/api/v1/user/book-appointment",
+        {
+          doctorId: params.doctorId,
+          userId: user._id,
+          doctorInfo: doctors,
+          date: moment(date, "DD-MM-YYYY").format("DD-MM-YYYY"),
+          userInfo: user,
+          time: moment(time, "HH:mm").format("HH:mm"),
         },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      dispatch(hideLoading());
+      if (res.data.success) {
+        message.success(res.data.message);
       }
-    );
-    dispatch(hideLoading());
-    if (res.data.success) {
-      setIsAvailable(true);
-      message.success(res.data.message);
-    } else {
-      message.error(res.data.message);
+    } catch (error) {
+      dispatch(hideLoading());
+      console.log(error);
     }
-  } catch (error) {
-    dispatch(hideLoading());
-    console.log(error);
-  }
-};
+  };
 
+  const handleAvailability = async () => {
+    try {
+      dispatch(showLoading());
+      const res = await axios.post(
+        "/api/v1/user/booking-availability",
+        {
+          doctorId: params.doctorId,
+          date: moment(date, "DD-MM-YYYY").format("DD-MM-YYYY"),
+          time: moment(time, "HH:mm").format("HH:mm"),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      dispatch(hideLoading());
+      if (res.data.success) {
+        setIsAvailable(true);
+        message.success(res.data.message);
+      } else {
+        message.error(res.data.message);
+      }
+    } catch (error) {
+      dispatch(hideLoading());
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     getUserData();
   }, []);
-  // eslint-disable-next-line
 
   return (
     <Layout>
@@ -129,8 +126,6 @@ const handleAvailability = async () => {
                     value={date ? moment(date, "DD-MM-YYYY") : undefined}
                     onChange={(value) => {
                       setDate(value ? value.format("DD-MM-YYYY") : null);
-                      console.log(value);
-                      
                     }}
                     allowClear
                   />
@@ -141,9 +136,7 @@ const handleAvailability = async () => {
                     value={time ? moment(time, "HH:mm") : undefined}
                     onChange={(value) => {
                       setTime(value ? value.format("HH:mm") : null);
-                      console.log(value);
-                    }
-                  }
+                    }}
                   />
 
                   <button
@@ -153,12 +146,14 @@ const handleAvailability = async () => {
                     Check Availability
                   </button>
 
-                  <button
-                    className="btn btn-success m-2"
-                    onClick={handleBooking}
-                  >
-                    Book Now
-                  </button>
+                  {isAvailable && (
+                    <button
+                      className="btn btn-success m-2"
+                      onClick={handleBooking}
+                    >
+                      Book Now
+                    </button>
+                  )}
                 </div>
               </div>
             )}

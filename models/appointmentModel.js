@@ -19,7 +19,7 @@ const appointmentSchema = new mongoose.Schema({
     },
     date: {
         type: String,
-        default: Date.now(), 
+        // default: Date.now(), 
         required: true
     },
     status: {
@@ -29,7 +29,7 @@ const appointmentSchema = new mongoose.Schema({
     },
     time: {
         type: String,
-        default: Date.now(), 
+        // default: Date.now(), 
         required: true
     },
 }, {

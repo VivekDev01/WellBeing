@@ -74,10 +74,10 @@ const BookingPageHospital = () => {
       dispatch(showLoading());
       const res = await axios.post(
         "/api/v1/user//booking-hospital-availability",
-        { 
-          hospitalId: params.hospitalId, 
+        {
+          hospitalId: params.hospitalId,
           date: moment(date, "DD-MM-YYYY").format("DD-MM-YYYY"),
-          time: moment(time, "HH:mm").format("HH:mm"), 
+          time: moment(time, "HH:mm").format("HH:mm"),
         },
         {
           headers: {
@@ -107,17 +107,15 @@ const BookingPageHospital = () => {
     <Layout>
       <section id="booking-page">
         <div className="container">
-          <h3>BookingPage</h3>
-          <div className="container m-2">
+          <h3 className="text-center">BookingPage</h3>
+          <div className="container m-5">
             {hospitals && (
               <div>
-                <h4>
-                  {hospitals.name}
-                </h4>
-                Timing: {moment(hospitals.timing_start, "HH:mm").format("HH:mm")} -{" "}
-                  {moment(hospitals.timing_end, "HH:mm").format("HH:mm")}
-
-                  <div className="d-dlex flex-column w-50">
+                <h4>{hospitals.name}</h4>
+                Timing:{" "}
+                {moment(hospitals.timing_start, "HH:mm").format("HH:mm")} -{" "}
+                {moment(hospitals.timing_end, "HH:mm").format("HH:mm")}
+                <div className="d-dlex flex-column w-50">
                   <DatePicker
                     type="date"
                     aria-required="true"
@@ -137,7 +135,7 @@ const BookingPageHospital = () => {
                       setTime(value ? value.format("HH:mm") : null);
                     }}
                   />
-
+                  <br />
                   <button
                     className="btn btn-primary m-2"
                     onClick={handleAvailability}
@@ -146,12 +144,12 @@ const BookingPageHospital = () => {
                   </button>
 
                   {/* {isAvailable && ( */}
-                    <button
-                      className="btn btn-success m-2"
-                      onClick={handleBooking}
-                    >
-                      Book Now
-                    </button>
+                  <button
+                    className="btn btn-success m-2"
+                    onClick={handleBooking}
+                  >
+                    Book Now
+                  </button>
                   {/* )} */}
                 </div>
               </div>

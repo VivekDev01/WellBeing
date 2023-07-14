@@ -105,8 +105,8 @@ const BookingPage = () => {
     <Layout>
       <section id="booking-page">
         <div className="container">
-          <h3>BookingPage</h3>
-          <div className="container m-2">
+          <h3 className="text-center">BookingPage</h3>
+          <div className="container m-5">
             {doctors && (
               <div>
                 <h4>
@@ -114,7 +114,8 @@ const BookingPage = () => {
                 </h4>
                 <h4>Fees: {doctors.feesPerConsultation}</h4>
                 <h4>
-                  Timing: {moment(doctors.timing_start, "HH:mm").format("HH:mm")} -{" "}
+                  Timing:{" "}
+                  {moment(doctors.timing_start, "HH:mm").format("HH:mm")} -{" "}
                   {moment(doctors.timing_end, "HH:mm").format("HH:mm")}
                 </h4>
 
@@ -138,7 +139,7 @@ const BookingPage = () => {
                       setTime(value ? value.format("HH:mm") : null);
                     }}
                   />
-
+                  <br />
                   <button
                     className="btn btn-primary m-2"
                     onClick={handleAvailability}
@@ -147,12 +148,12 @@ const BookingPage = () => {
                   </button>
 
                   {/* {isAvailable && ( */}
-                    <button
-                      className="btn btn-success m-2"
-                      onClick={handleBooking}
-                    >
-                      Book Now
-                    </button>
+                  <button
+                    className="btn btn-success m-2"
+                    onClick={handleBooking}
+                  >
+                    Book Now
+                  </button>
                   {/* )} */}
                 </div>
               </div>

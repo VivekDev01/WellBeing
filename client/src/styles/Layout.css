@@ -127,10 +127,10 @@ body{
 }
 .side_bar{
   position: relative;
-  top: 0;
-  left: -100%;
+  top: 18%;
+  left: 10%;
   width: 300px;
-  min-height: 60%;
+  /* min-height: 60%; */
   background: #ecf0f3;
   background-color:#ecf0f3 ;
   padding: 12px;
@@ -522,4 +522,11 @@ color: #ff5e14;
 
 .scroll-to-top:hover {
   opacity: 1;
+}
+
+
+.my-side-bar{
+  position: fixed;
+  top: 30%;
+  left: 1%;
 }

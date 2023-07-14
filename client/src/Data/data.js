@@ -19,11 +19,6 @@ export const userMenu =  [
         path:'/apply-hospital',
         icon: 'fa-regular fa-calendar-check'
     },
-    {
-        name:'Profile', 
-        path:'/profile',
-        icon:'fa-solid fa-user-doctor'
-    },
    
 ] 
 
@@ -33,11 +28,6 @@ export const adminMenu =  [
         path:'/',
         icon:'ri-home-heart-line'
     },
-    // {
-    //     name:'Hospitals',
-    //     path:'/admin/hospitals',
-    //     icon: 'ri-hospital-line'
-    // },
     {
         name:'Users', 
         path:'/admin/users',
@@ -52,11 +42,6 @@ export const adminMenu =  [
         name:'Hospitals',
         path:'/admin/hospitals',
         icon: 'fa-regular fa-calendar-check'
-    },
-    {
-        name:'Profile', 
-        path:'/profile',
-        icon:'fa-solid fa-user-doctor'
     },
 ]
 

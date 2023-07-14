@@ -1,9 +1,9 @@
-import React, { children, useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "../styles/Layout.css";
 import { adminMenu, userMenu } from "../Data/data";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { message, Badge, notification } from "antd";
+import { message, Badge } from "antd";
 import logo from "../images/logo-wellbeing.png";
 import logo2 from "../images/logo-wellbeing2.png";
 import rocket from "../images/rocket.png";
@@ -20,10 +20,10 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
-  
+
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
-  
+
       if (headerRef.current) {
         if (prevScrollPos > currentScrollPos) {
           headerRef.current.style.top = "0";
@@ -32,18 +32,17 @@ const Layout = ({ children }) => {
         }
       }
       prevScrollPos = currentScrollPos;
-  
+
       if (currentScrollPos > 200) {
         setShowScrollButton(true);
       } else {
         setShowScrollButton(false);
       }
     };
-  
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -52,10 +51,7 @@ const Layout = ({ children }) => {
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
-  // Null check for user object
-  //   const userName = user ? user.name : '';
 
-  //logout Handling
   const handleLogout = () => {
     localStorage.clear();
     message.success("Logout Successfully");
@@ -65,8 +61,6 @@ const Layout = ({ children }) => {
   if (!user) {
     return Navigate("/login");
   }
-
-  // ==========Doctor menu ==============
 
   const doctorMenu = [
     {
@@ -86,7 +80,6 @@ const Layout = ({ children }) => {
     },
   ];
 
-  // ==========Hospital menu ==============
   const hospitalMenu = [
     {
       name: "Home",
@@ -105,9 +98,6 @@ const Layout = ({ children }) => {
     },
   ];
 
-  //rendering menu list
-
-  // console.log(user.isAdmin);
   const sidebarMenu = user.isAdmin
     ? adminMenu
     : user.isDoctor
@@ -115,6 +105,23 @@ const Layout = ({ children }) => {
     : user.isHospital
     ? hospitalMenu
     : userMenu;
+
+  const [email, setEmail] = useState("");
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    // Perform any necessary validation on the email input
+
+    // Clear the input field
+    setEmail("");
+
+    // Display a success message
+    message.success("Subscribed successfully!");
+  };
 
   return (
     <>
@@ -125,7 +132,6 @@ const Layout = ({ children }) => {
             ref={headerRef}
             id="header"
             style={{
-              // position: "fixed",
               top: 0,
               left: 0,
               right: 0,
@@ -140,15 +146,12 @@ const Layout = ({ children }) => {
                   <li style={{ margin: 0, float: "left", display: "inline" }}>
                     <img src={logo2} width="10%" alt="logo" />
                   </li>
-                  <li className="myBar" style={{ float: "left" }}>
-                    <input type="checkbox" onClick={toggleSidebar} id="check" />
-                    <label className="button bars" htmlFor="check">
-                      <i className="fas fa-bars" />
-                    </label>
-                  </li>
 
                   <li>
-                    <a href="/" data-hover="Home">
+                    <a
+                      href={location.pathname === "/" ? "#" : "/"}
+                      data-hover="Home"
+                    >
                       Home
                     </a>
                   </li>
@@ -158,23 +161,34 @@ const Layout = ({ children }) => {
                     </a>
                   </li>
                   <li>
-                    <a href="#Doctors-list" data-hover="Doctors">
+                    <a href="/#Doctors-list" data-hover="Doctors">
                       Doctors
                     </a>
                   </li>
                   <li>
-                    <a href="#Hospitals-list" data-hover="Hospitals">
+                    <a href="/#Hospitals-list" data-hover="Hospitals">
                       Hospitals
                     </a>
                   </li>
                   <li>
-                    <a href="#footer" data-hover="About Us">
+                    <a href="/#footer" data-hover="About Us">
                       About Us
                     </a>
                   </li>
 
                   <li style={{ float: "right" }}>
-                    <a href="/profile" data-hover="Profile">
+                    <a
+                      data-hover="Profile"
+                      href={
+                        user.isDoctor
+                          ? `/doctor/profile/${user._id}`
+                          : user.isHospital
+                          ? `/hospital/profile/${user._id}`
+                          : user.isAdmin
+                          ? null
+                          : null
+                      }
+                    >
                       <i class="fa-solid fa-user"></i>
                       {user ? (
                         user.name
@@ -204,23 +218,25 @@ const Layout = ({ children }) => {
         </div>
 
         {/* Sidebar */}
-
         {showSidebar && (
           <aside
             style={{
               position: "fixed",
-              top: "50px",
               left: 0,
               width: 0,
               backgroundColor: "lightgray",
               height: "70%",
+              zIndex: 10,
             }}
           >
             {/* Sidebar content */}
             <div className="side_bar">
               <div className="title">
-                <div className="logo">WellBeing</div>
-                <label className=" button cancel" htmlFor="check">
+                <label
+                  className=" button cancel"
+                  style={{ cursor: "pointer" }}
+                  htmlFor="check"
+                >
                   <i className="fas fa-times" />
                 </label>
               </div>
@@ -280,10 +296,7 @@ const Layout = ({ children }) => {
         )}
 
         {/* Main Content */}
-        <main
-          // style={{ marginLeft: showSidebar ? "300px" : 0, marginTop: "50px" }}
-          style={{ marginTop: visible ? "50px" : 0 }}
-        >
+        <main style={{ marginTop: visible ? "50px" : 0 }}>
           {/* Main content */}
           <div className="children-area">
             <div className="container">{children}</div>
@@ -334,7 +347,7 @@ const Layout = ({ children }) => {
                     </div>
                     <div className="footer-text">
                       <p>
-                        A plateform to take care of your health and well being
+                        A platform to take care of your health and well-being
                       </p>
                     </div>
                     <div className="footer-social-icon">
@@ -373,34 +386,24 @@ const Layout = ({ children }) => {
                     </div>
                     <ul>
                       <li>
-                        <a href="/">Home</a>
-                      </li>
-                      <li>
-                        <a href="#">about</a>
-                      </li>
-                      <li>
-                        <a href="#">services</a>
+                        <a href={location.pathname === "/" ? "#" : "/"}>Home</a>
                       </li>
                       <li>
                         <a href="#">portfolio</a>
                       </li>
                       <li>
-                        <a href="#">Contact</a>
+                        <a href="/#footer">About us</a>
                       </li>
                       <li>
-                        <a href="#">About us</a>
-                      </li>
-                      <li>
-                        <a href="#">Our Services</a>
+                        <a onClick={toggleSidebar} href="#">
+                          Our Services
+                        </a>
                       </li>
                       <li>
                         <a href="#">Expert Team</a>
                       </li>
                       <li>
-                        <a href="#">Contact us</a>
-                      </li>
-                      <li>
-                        <a href="#">Latest News</a>
+                        <a href="/#footer">Contact us</a>
                       </li>
                     </ul>
                   </div>
@@ -416,10 +419,16 @@ const Layout = ({ children }) => {
                         the form below.
                       </p>
                     </div>
+
                     <div className="subscribe-form">
-                      <form action="#">
-                        <input type="text" placeholder="Email Address" />
-                        <button>
+                      <form onSubmit={handleSubscribe}>
+                        <input
+                          type="text"
+                          placeholder="Email Address"
+                          value={email}
+                          onChange={handleEmailChange}
+                        />
+                        <button type="submit">
                           <i className="fab fa-telegram-plane" />
                         </button>
                       </form>
@@ -441,11 +450,21 @@ const Layout = ({ children }) => {
           </div>
         </footer>
 
-        {showScrollButton && (
-          <img className="scroll-to-top" onClick={scrollToTop} src={rocket}></img>
-          // <i className="ri-arrow-up-line scroll-to-top" onClick={scrollToTop} />
-        )}
+        <div className="my-side-bar">
+          <input type="checkbox" onClick={toggleSidebar} id="check" />
+          <label className="button bars" htmlFor="check">
+            <i className="fas fa-bars" />
+          </label>
+        </div>
 
+        {showScrollButton && (
+          <img
+            className="scroll-to-top"
+            onClick={scrollToTop}
+            src={rocket}
+            alt="scroll-to-top"
+          />
+        )}
       </div>
     </>
   );

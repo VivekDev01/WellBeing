@@ -109,9 +109,8 @@ const HomePage = () => {
           <div className="row mt-3">
             {doctors &&
               doctors.map((doctor, index) => (
-                <div className="col">
-                  {" "}
-                  <DoctorList doctor={doctor} />{" "}
+                <div className="col-lg-3 col-md-6 col-sm-12">
+                  <DoctorList doctor={doctor} />
                 </div>
               ))}
           </div>
@@ -128,7 +127,7 @@ const HomePage = () => {
           <div className="row mt-3">
             {hospitals &&
               hospitals.map((hospital, index) => (
-                <div className="col">
+                <div className="col-lg-3 col-md-6 col-sm-12">
                   <HospitalList hospital={hospital} />
                 </div>
               ))}

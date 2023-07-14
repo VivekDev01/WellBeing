@@ -1,62 +1,58 @@
 import mongoose from "mongoose";
 
-const doctorSchema= new mongoose.Schema({
-    userId:{
+const doctorSchema = new mongoose.Schema({
+    userId: {
         type: String
     },
-    firstName:{
-        type:String,
+    firstName: {
+        type: String,
         required: [true, "First name is required"]
     },
-    lastName:{
+    lastName: {
         type: String,
         required: [true, "Last Name is required"]
     },
-    phone:{
+    phone: {
         type: String,
         required: [true, "Phone number is required"]
     },
-    email:{
-        type:String,
+    email: {
+        type: String,
         required: [true, "Email is required"]
     },
-    website:{
-        type: String, 
+    website: {
+        type: String,
     },
-    address:{
+    address: {
         type: String,
         required: [true, "Adress is required"]
     },
-    specialization:{
+    specialization: {
         type: String,
         required: [true, "Specialization is required"]
     },
-    experience:{
-        type:String,
+    experience: {
+        type: String,
         required: [true, "Experience is required"]
     },
-    feesPerConsultation:{
+    feesPerConsultation: {
         type: Number,
         require: [true, "Fee detail is required"]
     },
-    timing_start:{
-        type: Date,
-        default: Date.now,
+    timing_start: {
+        type: String,
         required: [true, "Work start timing is required"]
     },
-    timing_end:{
-        type: Date,
-        default: Date.now,
+    timing_end: {
+        type: String,
         required: [true, "Work end timing is required"]
     },
-    status:{
-        type:String,
-        default: 'Pending'
-    },
+    status: {
+        type: String,
+        default: "Pending"
+    }
+}, { timestamps: true });
 
-}, {timestamps:true});
-//timestamps: true ----> to capture all the time
-
-const doctorModel= mongoose.model('doctors', doctorSchema)
+const doctorModel = mongoose.model("doctors", doctorSchema);
 
 export default doctorModel;

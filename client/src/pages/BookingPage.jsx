@@ -114,8 +114,8 @@ const BookingPage = () => {
                 </h4>
                 <h4>Fees: {doctors.feesPerConsultation}</h4>
                 <h4>
-                  Timing: {moment(doctors.timing_start).format("HH:mm")} -{" "}
-                  {moment(doctors.timing_end).format("HH:mm")}
+                  Timing: {moment(doctors.timing_start, "HH:mm").format("HH:mm")} -{" "}
+                  {moment(doctors.timing_end, "HH:mm").format("HH:mm")}
                 </h4>
 
                 <div className="d-dlex flex-column w-50">
@@ -146,14 +146,14 @@ const BookingPage = () => {
                     Check Availability
                   </button>
 
-                  {isAvailable && (
+                  {/* {isAvailable && ( */}
                     <button
                       className="btn btn-success m-2"
                       onClick={handleBooking}
                     >
                       Book Now
                     </button>
-                  )}
+                  {/* )} */}
                 </div>
               </div>
             )}

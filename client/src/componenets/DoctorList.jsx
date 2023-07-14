@@ -1,15 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 const DoctorList = ({ doctor }) => {
   const navigate = useNavigate();
 
   const formatTiming = (timing) => {
-    const timingStart = new Date(timing.timing_start);
-    const timingEnd = new Date(timing.timing_end);
-    const startTime = timingStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const endTime = timingEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    return `${startTime} - ${endTime}`;
+    const timingStart = moment(timing.timing_start, "HH:mm").format("HH:mm");
+    const timingEnd = moment(timing.timing_end, "HH:mm").format("HH:mm");
+    return `${timingStart} - ${timingEnd}`;
   };
 
   return (

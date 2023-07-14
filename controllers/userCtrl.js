@@ -80,43 +80,52 @@ const authController= async (req, res) => {
             error
         })
     }
-}
+}   
 
 
-const applyDoctorController = async(req, res) => {
+// const newAppointment = new appointmentModel({
+//     ...req.body,
+//     status: req.body.status || "pending",
+//   });
+//   await newAppointment.save();
+
+
+
+const applyDoctorController = async (req, res) => {
     try {
-        const newDoctor = await doctorModel({
-            ...req.body,
-            status: 'pending',
-            timing_start: new Date(req.body.timing_start), // Convert timing_start to a Date object
-            timing_end: new Date(req.body.timing_end), // Convert timing_end to a Date object
-          });
-          await newDoctor.save();
-        const adminUser= await userModel.findOne({isAdmin:true})
-        const Notification= adminUser.Notification
-        Notification.push({
-            type:"apply-doctor-request",
-            message: `${newDoctor.firstName} ${newDoctor.lastName} has applied for a Doctor Account`,
-            data:{
-                doctorId:newDoctor._id,
-                name: newDoctor.firstName +" "+newDoctor.lastName,
-                onclickPath:'/admin/doctors'
-            }
-        })
-        await userModel.findByIdAndUpdate(adminUser._id, {Notification});
-        res.status(201).send({
-            success:true,
-            message:'Registration for Dector Account is done'
-        })
+      const newDoctor = await doctorModel({
+        ...req.body,
+        status: 'pending',
+      });
+      await newDoctor.save();
+  
+      const adminUser = await userModel.findOne({ isAdmin: true });
+      const Notification = adminUser.Notification;
+      Notification.push({
+        type: "apply-doctor-request",
+        message: `${newDoctor.firstName} ${newDoctor.lastName} has applied for a Doctor Account`,
+        data: {
+          doctorId: newDoctor._id,
+          name: newDoctor.firstName + " " + newDoctor.lastName,
+          onclickPath: '/admin/doctors',
+        },
+      });
+      await userModel.findByIdAndUpdate(adminUser._id, { Notification });
+  
+      res.status(201).send({
+        success: true,
+        message: 'Registration for Doctor Account is done',
+      });
     } catch (error) {
-        console.log(error);
-        res.status(500).send({
-            success:false,
-            error,
-            message: 'Error while applying as a doctor'
-        })
+      console.log(error);
+      res.status(500).send({
+        success: false,
+        error,
+        message: 'Error while applying as a doctor',
+      });
     }
-}
+  };
+  
 
 
 const applyHospitalController = async(req, res) => {
@@ -267,11 +276,11 @@ const bookAppointmentController = async (req, res) => {
     }
   };
   
-  
+   
   
 const bookingAvailabilityController = async (req, res) => {
   try {
-    const date = moment(req.body.date, 'DD-MM-YYYY').format("YYYY-MM-DD");
+    const date = req.body.date;
     const fromTime = moment(req.body.time, 'HH:mm').subtract(1, 'hours').format("HH:mm");
     const toTime = moment(req.body.time, 'HH:mm').add(1, 'hours').format("HH:mm");
     const doctorId = req.body.doctorId;

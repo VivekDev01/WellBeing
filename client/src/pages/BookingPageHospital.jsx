@@ -49,9 +49,9 @@ const BookingPageHospital = () => {
           hospitalId: params.hospitalId,
           userId: user._id,
           hospitalInfo: hospitals,
-          date: date,
+          date: moment(date, "DD-MM-YYYY").format("DD-MM-YYYY"),
           userInfo: user,
-          time: time,
+          time: moment(time, "HH:mm").format("HH:mm"),
         },
         {
           headers: {
@@ -74,7 +74,11 @@ const BookingPageHospital = () => {
       dispatch(showLoading());
       const res = await axios.post(
         "/api/v1/user//booking-hospital-availability",
-        { hospitalId: params.hospitalId, date, time },
+        { 
+          hospitalId: params.hospitalId, 
+          date: moment(date, "DD-MM-YYYY").format("DD-MM-YYYY"),
+          time: moment(time, "HH:mm").format("HH:mm"), 
+        },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -108,25 +112,32 @@ const BookingPageHospital = () => {
             {hospitals && (
               <div>
                 <h4>
-                  Dr. {hospitals.name}
+                  {hospitals.name}
                 </h4>
-                {/* <h4>Timing: {hospitals.timing[0]} - {hospitals.timing[1]} </h4>  */}
+                Timing: {moment(hospitals.timing_start, "HH:mm").format("HH:mm")} -{" "}
+                  {moment(hospitals.timing_end, "HH:mm").format("HH:mm")}
 
-                <div className="d-dlex flex-column w-50">
+                  <div className="d-dlex flex-column w-50">
                   <DatePicker
+                    type="date"
                     aria-required="true"
                     className="m-2"
-                    format={"DD-MM-YYYY"}
+                    value={date ? moment(date, "DD-MM-YYYY") : undefined}
                     onChange={(value) => {
-                      setDate(moment(value).format("DD-MM-YYYY"));
+                      setDate(value ? value.format("DD-MM-YYYY") : null);
                     }}
+                    allowClear
                   />
+
                   <TimePicker
+                    type="time"
                     className="m-2"
+                    value={time ? moment(time, "HH:mm") : undefined}
                     onChange={(value) => {
-                      setTime(moment(value).format("HH:mm"));
+                      setTime(value ? value.format("HH:mm") : null);
                     }}
                   />
+
                   <button
                     className="btn btn-primary m-2"
                     onClick={handleAvailability}
@@ -134,12 +145,14 @@ const BookingPageHospital = () => {
                     Check Availability
                   </button>
 
-                  <button
-                    className="btn btn-success m-2"
-                    onClick={handleBooking}
-                  >
-                    Book Now
-                  </button>
+                  {/* {isAvailable && ( */}
+                    <button
+                      className="btn btn-success m-2"
+                      onClick={handleBooking}
+                    >
+                      Book Now
+                    </button>
+                  {/* )} */}
                 </div>
               </div>
             )}

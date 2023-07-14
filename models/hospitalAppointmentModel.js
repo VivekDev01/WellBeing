@@ -18,19 +18,21 @@ const hospitalAppointmentSchema = new mongoose.Schema({
         type:String,
         required: true
     },
-    date:{
+    date: {
         type: String,
+        // default: Date.now(), 
         required: true
     },
-    status:{
+    status: {
         type: String,
         required: true,
         default: "pending"
     },
-    time:{
+    time: {
         type: String,
+        // default: Date.now(), 
         required: true
-    }
+    },
 },{
     timestamps: true
 })

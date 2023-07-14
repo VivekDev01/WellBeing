@@ -1,8 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const HospitalList = ({ hospital }) => {
     const navigate = useNavigate();
+
+    const formatTiming = (timing) => {
+      const timingStart = moment(timing.timing_start, "HH:mm").format("HH:mm");
+      const timingEnd = moment(timing.timing_end, "HH:mm").format("HH:mm");
+      return `${timingStart} - ${timingEnd}`;
+    };
 
   return (
     <>
@@ -12,7 +19,7 @@ const HospitalList = ({ hospital }) => {
         </div>
         <div className="card-body"> 
           <p>
-            <b>Specialization</b> {hospital.specialization}
+            <b>Specializations</b> {hospital.specialization}
           </p>
           <p>
             <b>Address</b> {hospital.address}
@@ -25,7 +32,7 @@ const HospitalList = ({ hospital }) => {
           </p>
          
           <p>
-            <b>Timings</b> {hospital.timing[0]} - {hospital.timing[1]}
+          <b>Timings:</b> {formatTiming(hospital)}
           </p>
         </div>
       </div>

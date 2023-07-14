@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Layout from '../componenets/Layout'
 import {Col, Form, Input, Row, TimePicker, message} from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
@@ -15,14 +15,17 @@ const ApplyHospital = () => {
     const navigate = useNavigate()
 
 
+    const [start, setStart] = useState(moment());
+    const [end, setEnd] = useState(moment());
+
     const handleFinish=async (values)=>{
         try {
             dispatch(showLoading())
-            const res= await axios.post("/api/v1/user/apply-hospital", {...values, userId:user._id , 
-                timing:[
-                    moment(values.timing[0]).format("HH:mm"),
-                    moment(values.timing[1]).format("HH:mm")
-                ],
+            const res= await axios.post("/api/v1/user/apply-hospital", {
+                ...values, 
+                userId:user._id , 
+                timing_start: moment(start, 'HH:mm').format("HH:mm"),
+                timing_end: moment(end, 'HH:mm').format("HH:mm"),
             },
             {
                 headers:{
@@ -86,8 +89,25 @@ const ApplyHospital = () => {
                 </Col>
                 
                 <Col xs={24} md={24} lg={8}>
-                    <Form.Item label="Timing" name="timing" required rules={[{required:true}]}>
-                        <TimePicker.RangePicker format={"HH:mm"}/>
+                    <Form.Item label='Start Timing' name='timing_start' required rules={[{ required: true }]}>
+                    <TimePicker 
+                    type="time"
+                    value={start ? moment(start, "HH:mm") : undefined}
+                    onChange={(value) => {
+                        setStart(value ? value.format("HH:mm") : null);
+                    }}
+                    />
+                    </Form.Item>
+                </Col>
+                <Col xs={24} md={24} lg={8}>
+                    <Form.Item label='End Timing' name='timing_end' required rules={[{ required: true }]}>
+                    <TimePicker 
+                    type="time"
+                    value={end ? moment(end, "HH:mm") : undefined}
+                    onChange={(value) => {
+                        setEnd(value ? value.format("HH:mm") : null);
+                    }}
+                    />
                     </Form.Item>
                 </Col>
 

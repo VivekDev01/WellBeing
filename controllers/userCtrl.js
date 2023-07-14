@@ -82,15 +82,6 @@ const authController= async (req, res) => {
     }
 }   
 
-
-// const newAppointment = new appointmentModel({
-//     ...req.body,
-//     status: req.body.status || "pending",
-//   });
-//   await newAppointment.save();
-
-
-
 const applyDoctorController = async (req, res) => {
     try {
       const newDoctor = await doctorModel({
@@ -130,8 +121,12 @@ const applyDoctorController = async (req, res) => {
 
 const applyHospitalController = async(req, res) => {
     try {
-        const newHospital = await hospitalModel({...req.body, status:'pending'})
+        const newHospital = await hospitalModel({
+          ...req.body, 
+          status:'pending'
+        })
         await newHospital.save();
+        
         const adminUser= await userModel.findOne({isAdmin:true})
         const Notification= adminUser.Notification
         Notification.push({
@@ -276,7 +271,6 @@ const bookAppointmentController = async (req, res) => {
     }
   };
   
-   
   
 const bookingAvailabilityController = async (req, res) => {
   try {
@@ -312,16 +306,14 @@ const bookingAvailabilityController = async (req, res) => {
   }
 };
 
-  
-
   const bookHospitalAppointmentController = async (req, res) => {
     try {
-      req.body.date = moment(req.body.date, 'DD-MM-YYYY').toISOString();
-      req.body.timing_start = moment(req.body.timing_start, 'HH:mm').toDate();
-      req.body.timing_end = moment(req.body.timing_end, 'HH:mm').toDate();
-      req.body.status = 'pending';
-      const newAppointment = new hospitalAppointmentModel(req.body);
+      const newAppointment = new hospitalAppointmentModel({
+        ...req.body,
+        status: req.body.status || "pending",
+      });
       await newAppointment.save();
+
       const user = await userModel.findOne({ _id: req.body.hospitalInfo.userId });
       user.Notification.push({
         type: 'New-Hospital-Appointment-Request',
@@ -342,18 +334,19 @@ const bookingAvailabilityController = async (req, res) => {
       });
     }
   };
-  
-
-
-  
 
 const bookingHospitalAvailabilityController = async(req, res) => {
     try {
-        const date= moment(req.body.date, 'DD-MM-YYYY').toISOString();
-        const fromTime=moment(req.body.time, 'HH:mm').subtract(1, 'hours').toISOString(); 
-        const toTime=moment(req.body.time, 'HH:mm').add(1, 'hours').toISOString(); 
+        const date = req.body.date;
+        const fromTime = moment(req.body.time, 'HH:mm').subtract(1, 'hours').format("HH:mm");
+        const toTime = moment(req.body.time, 'HH:mm').add(1, 'hours').format("HH:mm");
         const hospitalId= req.body.hospitalId;
-        const appointments = await hospitalAppointmentModel.find({hospitalId, date, time:{$gte:fromTime, $lte:toTime}})
+
+        const appointments = await hospitalAppointmentModel.find({
+          hospitalId,
+          date,
+          time:{$gte:fromTime, $lte:toTime}
+          })
         if(appointments.length>0){
             return res.status(200).send({
                 success:true,

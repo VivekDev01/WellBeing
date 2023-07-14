@@ -27,9 +27,13 @@ const hospitalSchema= new mongoose.Schema({
         type: String,
         required: [true, "Specialization is required"]
     },
-    timing:{
-        type: Object,
-        required: [true, "Work timing is required"]
+    timing_start: {
+        type: String,
+        required: [true, "Work start timing is required"]
+    },
+    timing_end: {
+        type: String,
+        required: [true, "Work end timing is required"]
     },
     status:{
         type:String,

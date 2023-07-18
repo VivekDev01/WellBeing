@@ -125,22 +125,20 @@ header nav ul li.last-li:after {
 body{
   background: #ecf0f3;
 }
-.side_bar{
-  position: relative;
-  top: 18%;
-  left: 10%;
+
+.side_bar {
+  position: fixed;
+  top: 50%;
+  left: 3%;
+  transform: translateY(-50%);
   width: 300px;
-  /* min-height: 60%; */
   background: #ecf0f3;
-  background-color:#ecf0f3 ;
   padding: 12px;
-  box-shadow: -3px -3px 7px #ffffff,
-             3px 3px 5px #ceced1,
-             inset -3px -3px 7px #ffffff,
-             inset 3px 3px 5px #ceced1;
- transition: all 0.3s ease;
- z-index: 10;
+  box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1, inset -3px -3px 7px #ffffff, inset 3px 3px 5px #ceced1;
+  transition: all 0.3s ease;
+  z-index: 10;
 }
+
 
 .sidebar.active{
   float: left;
@@ -251,6 +249,7 @@ body{
   display: none;
 }
 .bars{
+  cursor: pointer;
   position: relative;
   top: 10px;
 }
@@ -526,6 +525,7 @@ color: #ff5e14;
 
 
 .my-side-bar{
+  cursor: pointer;
   position: fixed;
   top: 30%;
   left: 1%;

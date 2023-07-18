@@ -132,7 +132,7 @@ const Layout = ({ children }) => {
             ref={headerRef}
             id="header"
             style={{
-              top: 0,
+              top: 0, 
               left: 0,
               right: 0,
               maxHeight: "60px",

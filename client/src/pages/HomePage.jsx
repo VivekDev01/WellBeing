@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState} from "react";
 import axios from "axios";
 import Layout from "../componenets/Layout";
 import DoctorList from "../componenets/DoctorList";
@@ -7,7 +7,6 @@ import "../styles/HomePage.css";
 import img from "../images/banner.png";
 import info1 from "../images/info1.png";
 import info2 from "../images/info2.png";
-import info3 from "../images/info3.png";
 import info4 from "../images/info4.png";
 
 const HomePage = () => {
@@ -49,10 +48,6 @@ const HomePage = () => {
     getUserData();
     getHospitalsData();
   }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <Layout>

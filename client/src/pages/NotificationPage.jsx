@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../componenets/Layout'
-import { Tabs, message, notification } from 'antd'
+import { Tabs, message} from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import {showLoading, hideLoading } from "../redux/features/alertSlice"
 import axios from "axios"

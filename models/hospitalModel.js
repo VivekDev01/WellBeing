@@ -43,8 +43,6 @@ const hospitalSchema= new mongoose.Schema({
 }, {timestamps:true});
 //timestamps: true ----> to capture all the time
 
-console.log(mongoose.modelNames());
-
 const hospitalModel= mongoose.model('hospitals', hospitalSchema)
 
 export default hospitalModel;

@@ -70,7 +70,6 @@ const BookingPage = () => {
 
   const handleAvailability = async () => {
     try {
-      dispatch(showLoading());
       const res = await axios.post(
         "/api/v1/user/booking-availability",
         {
@@ -84,7 +83,6 @@ const BookingPage = () => {
           },
         }
       );
-      dispatch(hideLoading());
       if (res.data.success) {
         setIsAvailable(true);
         message.success(res.data.message);
@@ -92,7 +90,6 @@ const BookingPage = () => {
         message.error(res.data.message);
       }
     } catch (error) {
-      dispatch(hideLoading());
       console.log(error);
     }
   };
@@ -124,7 +121,6 @@ const BookingPage = () => {
                     type="date"
                     aria-required="true"
                     className="m-2"
-                    value={date ? moment(date, "DD-MM-YYYY") : undefined}
                     onChange={(value) => {
                       setDate(value ? value.format("DD-MM-YYYY") : null);
                     }}
@@ -134,7 +130,6 @@ const BookingPage = () => {
                   <TimePicker
                     type="time"
                     className="m-2"
-                    value={time ? moment(time, "HH:mm") : undefined}
                     onChange={(value) => {
                       setTime(value ? value.format("HH:mm") : null);
                     }}

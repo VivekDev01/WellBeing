@@ -275,16 +275,30 @@ const bookAppointmentController = async (req, res) => {
 const bookingAvailabilityController = async (req, res) => {
   try {
     const date = req.body.date;
-    const fromTime = moment(req.body.time, 'HH:mm').subtract(1, 'hours').format("HH:mm");
-    const toTime = moment(req.body.time, 'HH:mm').add(1, 'hours').format("HH:mm");
+    var time = req.body.time;
+    time = time.split(":");
+    time = parseInt(time[0]);
+    console.log(time);
     const doctorId = req.body.doctorId;
+    const doctor = await doctorModel.findOne({ _id: doctorId });
 
-    const appointments = await appointmentModel.find({
-      doctorId,
-      date,
-      time: { $gte: fromTime, $lte: toTime },
-    });
+    var fromTime = doctor.timing_start;
+    fromTime = fromTime.split(":");
+    fromTime = parseInt(fromTime[0]);
+    console.log(fromTime);
+  
+    var toTime = doctor.timing_end;
+    toTime = toTime.split(":");
+    toTime = parseInt(toTime[0]);
+    console.log(toTime);
 
+    if (time < fromTime || time > toTime) {
+      return res.status(200).send({
+        success: true,
+        message: "Please Pick the time within the doctor's timing",
+      });
+    }
+    const appointments = await appointmentModel.find({_id: doctorId, date: date, time: time});
     if (appointments.length > 0) {
       return res.status(200).send({
         success: true,

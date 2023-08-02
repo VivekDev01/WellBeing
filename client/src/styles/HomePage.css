@@ -135,8 +135,24 @@
 
   .info{
     margin: 100px auto 100px auto;
+    padding: 75px 0 75px 0;
     text-align: center;
-    background-color: #ecf0f3;
+    /* background: #ff1391; */
+    background-image: linear-gradient(45deg, #ff1391 0%, #8740ca 100%);
+  }
+
+  .info h3{
+    color: #fff;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .info p{
+    color: #dddddd;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 20px;
   }
 
   .circular-image {

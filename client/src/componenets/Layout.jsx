@@ -9,6 +9,7 @@ import logo2 from "../images/logo-wellbeing2.png";
 import rocket from "../images/rocket.png";
 
 const Layout = ({ children }) => {
+  const year = new Date().getFullYear();
   const { user } = useSelector((state) => state.user);
   const location = useLocation();
   const Navigate = useNavigate();
@@ -299,7 +300,7 @@ const Layout = ({ children }) => {
         <main style={{ marginTop: visible ? "50px" : 0 }}>
           {/* Main content */}
           <div className="children-area">
-            <div className="container">{children}</div>
+            {children}
           </div>
         </main>
 
@@ -336,22 +337,9 @@ const Layout = ({ children }) => {
                 </div>
               </div>
             </div>
-            <div className="footer-content pt-5 pb-5">
-              <div className="row">
-                <div className="col-xl-4 col-lg-4 mb-50">
-                  <div className="footer-widget">
-                    <div className="footer-logo">
-                      <a href="/">
-                        <img src={logo} className="img-fluid" alt="logo" />
-                      </a>
-                    </div>
-                    <div className="footer-text">
-                      <p>
-                        A platform to take care of your health and well-being
-                      </p>
-                    </div>
-                    <div className="footer-social-icon">
-                      <span>Follow us</span>
+
+            <div className="footer-content text-center pt-2 pb-2">
+                <div className="footer-social-icon">
                       <a
                         href="https://www.facebook.com/vivekdev.shah/"
                         target="_blank"
@@ -377,73 +365,15 @@ const Layout = ({ children }) => {
                         <i className="fab fa-youtube" />
                       </a>
                     </div>
-                  </div>
-                </div>
-                <div className="col-xl-4 col-lg-4 col-md-6 mb-30">
-                  <div className="footer-widget">
-                    <div className="footer-widget-heading">
-                      <h3>Useful Links</h3>
-                    </div>
-                    <ul>
-                      <li>
-                        <a href={location.pathname === "/" ? "#" : "/"}>Home</a>
-                      </li>
-                      <li>
-                        <a href="#">portfolio</a>
-                      </li>
-                      <li>
-                        <a href="/#footer">About us</a>
-                      </li>
-                      <li>
-                        <a onClick={toggleSidebar} href="#">
-                          Our Services
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">Expert Team</a>
-                      </li>
-                      <li>
-                        <a href="/#footer">Contact us</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="col-xl-4 col-lg-4 col-md-6 mb-50">
-                  <div className="footer-widget">
-                    <div className="footer-widget-heading">
-                      <h3>Subscribe</h3>
-                    </div>
-                    <div className="footer-text mb-25">
-                      <p>
-                        Don’t miss to subscribe to our new feeds, kindly fill
-                        the form below.
-                      </p>
-                    </div>
-
-                    <div className="subscribe-form">
-                      <form onSubmit={handleSubscribe}>
-                        <input
-                          type="text"
-                          placeholder="Email Address"
-                          value={email}
-                          onChange={handleEmailChange}
-                        />
-                        <button type="submit">
-                          <i className="fab fa-telegram-plane" />
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
+
           </div>
           <div className="copyright-area text-center">
             <div className="container">
               <div className="copyright-text">
                 <p>
-                  Copyright © 2023, All Right Reserved{" "}
-                  <a href="https://codepen.io/anupkumar92/">Vivek Dev Shah</a>
+                  Copyright © {year}, All Right Reserved{" "}
+                  <a href="https://vivekdevshah-portfolio.netlify.app/">Vivek Dev Shah</a>
                 </p>
               </div>
             </div>

@@ -69,8 +69,9 @@ const HomePage = () => {
       </section>
 
       <section className="info">
+        <div className="container text-center">
         <div className="row">
-          <div className="col">
+          <div className="col-xl-4 col-md-4 col-sm-12">
             <img className="circular-image" src={info4} alt="" />
             <h3>Book Appointment</h3>
             <p>
@@ -78,12 +79,12 @@ const HomePage = () => {
               listed below
             </p>
           </div>
-          <div className="col">
+          <div className="col-xl-4 col-md-4 col-sm-12">
             <img className="circular-image" src={info1} alt="" />
             <h3>Apply as a Doctor</h3>
             <p>Doctors can register themselves by applying as a Doctor</p>
           </div>
-          <div className="col">
+          <div className="col-xl-4 col-md-4 col-sm-12">
             <img className="circular-image" src={info2} alt="" />
             <h3>Apply as a Hospital</h3>
             <p>
@@ -91,6 +92,7 @@ const HomePage = () => {
               Hospital
             </p>
           </div>
+        </div>
         </div>
       </section>
 

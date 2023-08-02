@@ -59,6 +59,7 @@ const NotificationPage = () => {
 
   return (
     <Layout>
+      <div className="container">
         <h4 className='p-3 text-center'>Notificaton Page</h4>
         <Tabs>
           <Tabs.TabPane tab="Unread" key={0}>
@@ -91,6 +92,7 @@ const NotificationPage = () => {
             }
           </Tabs.TabPane>
         </Tabs>
+      </div>
     </Layout>
   )
 }

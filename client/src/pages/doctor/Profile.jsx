@@ -74,6 +74,7 @@ const handleFinish = async (values) => {
 
   return (
     <Layout>
+      <div className="container">
       <h1>Manage Profile</h1>
       {
         doctor &&
@@ -163,6 +164,7 @@ const handleFinish = async (values) => {
           </Row>
         </Form>
       }
+      </div>
     </Layout>
   );
 }

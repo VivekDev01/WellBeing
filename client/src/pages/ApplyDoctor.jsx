@@ -51,6 +51,7 @@ const ApplyDoctor = () => {
 
   return (
     <Layout>
+      <div className="container">
       <h1 className='text-center'>Apply Doctor</h1>
       <Form layout='vertical' onFinish={handleFinish} className='m-3'>
         <h4>Personal Details: </h4>
@@ -132,6 +133,7 @@ const ApplyDoctor = () => {
           </Col>
         </Row>
       </Form>
+      </div>
     </Layout>
   );
 };

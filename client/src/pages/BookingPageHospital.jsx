@@ -123,6 +123,7 @@ const BookingPage = () => {
 
   return (
     <Layout>
+      <div className="container">
       <section id="booking-page">
         <div className="container">
           <h3 className="text-center">BookingPage</h3>
@@ -181,6 +182,7 @@ const BookingPage = () => {
           </div>
         </div>
       </section>
+      </div>
     </Layout>
   );
 };

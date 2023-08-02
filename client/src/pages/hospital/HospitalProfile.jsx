@@ -74,6 +74,8 @@ const Profile = () => {
 
   return (
     <Layout>
+      <div className="container">
+
         <h1>Manage Profile</h1>
         {
           hospital && 
@@ -149,6 +151,7 @@ const Profile = () => {
             </Row>
         </Form>
         }
+        </div>
     </Layout>
   )
 }

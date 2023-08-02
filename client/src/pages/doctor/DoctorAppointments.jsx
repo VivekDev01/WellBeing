@@ -95,8 +95,10 @@ const DoctorAppointments = () => {
 
   return (
     <Layout>
+      <div className="container">
       <h1>Appointments List</h1>
       <Table dataSource={appointments} columns={columns} />
+      </div>
     </Layout>
   );
 };

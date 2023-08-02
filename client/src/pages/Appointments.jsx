@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Layout from "../componenets/Layout";
 import axios from "axios";
 import { Table } from "antd";
-import moment from "moment";
 
 const Appointments = () => {
   const [DoctorAppointments, setDoctorAppointments] = useState([]);
@@ -78,9 +77,11 @@ const Appointments = () => {
 
   return (
     <Layout>
+      <div className="container">
       <h1>Appointments List</h1>
         <Table dataSource={DoctorAppointments} columns={DoctorAppointmentColumns} />
         <Table dataSource={HospitalAppointments} columns={HospitalAppointmentColumns} />
+        </div>
     </Layout>
   );
 };

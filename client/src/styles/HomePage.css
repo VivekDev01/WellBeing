@@ -2,22 +2,42 @@
     min-height: 80px;
 }
 #banner h1{
-    margin-top: 30px;
     font-size: 80px;
     text-align: center;
     line-height: 1.5;
     white-space: pre-line;
 }
-#banner img{
+
+  #banner img {
   text-align: center;
-  width: 90%;
+  max-width: 90%;
+  height: auto;
 }
-@media (max-width: 768px) {
-    #banner h1{
-      font-size: 20px;
-      line-height: 1.4;
-    }
+
+/* Media query for screens smaller than 768px (e.g., smartphones) */
+@media (max-width: 767px) {
+  #banner h1{
+    font-size: 40px;
+    text-align: center;
+    line-height: 1;
   }
+  #banner img {
+    width: 60%; /* Decrease the width for smaller screens */
+  }
+}
+
+/* Media query for screens larger than 768px (e.g., tablets, desktops) */
+@media (min-width: 768px) {
+  #banner h1{
+    font-size: 80px;
+    text-align: center;
+    line-height: 1.5;
+  }
+  #banner img {
+    width: 90%; /* Adjust the width as per your requirement */
+  }
+}
+
 
   
   /* ======================================================================================================================= */

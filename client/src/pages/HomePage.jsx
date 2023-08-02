@@ -52,17 +52,17 @@ const HomePage = () => {
   return (
     <Layout>
       <section id="banner">
-        <div className="container text-center">
+        <div className="container">
           <div className="row">
-            <div className="col center">
+            <div className="col-lg-6 col-md-6 col-sm-12">
               <h1>
                 Your <span style={{ color: "#00cc00" }}>Health</span>, our{" "}
-                <span style={{ color: "#ff5e14" }}>Priority</span>. Book your{" "}
-                <span style={{ color: "#4d4dff" }}>Appointment</span> Today!
+                <span style={{ color: "#f91495" }}>Priority</span>. Book your{" "}
+                <span style={{ color: "#973bc3" }}>Appointment</span> Today!
               </h1>
             </div>
-            <div className="col center">
-              <img src={img} alt="" />
+            <div className="col-lg-6 col-md-6 col-sm-12">
+              <img src={img} alt="banner-img" />
             </div>
           </div>
         </div>

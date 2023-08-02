@@ -296,9 +296,7 @@ const bookAppointmentController = async (req, res) => {
           message: "Please Pick the time within the doctor's timing",
         });
       }
-  
       const appointments = await appointmentModel.find({ doctorId: doctorId, date: date });
-  
       let isAppointmentAvailable = true;
       appointments.forEach((appointment) => {
         var appointmentTime = appointment.time;
@@ -362,39 +360,65 @@ const bookAppointmentController = async (req, res) => {
     }
   };
 
-const bookingHospitalAvailabilityController = async(req, res) => {
-    try {
-        const date = req.body.date;
-        const fromTime = moment(req.body.time, 'HH:mm').subtract(1, 'hours').format("HH:mm");
-        const toTime = moment(req.body.time, 'HH:mm').add(1, 'hours').format("HH:mm");
-        const hospitalId= req.body.hospitalId;
 
-        const appointments = await hospitalAppointmentModel.find({
-          hospitalId,
-          date,
-          time:{$gte:fromTime, $lte:toTime}
-          })
-        if(appointments.length>0){
-            return res.status(200).send({
-                success:true,
-                message: "Appointment Not Available at this time",
-            })
-        }
-        else{
-            return res.status(200).send({
-                    success:true,
-                    message: "Appointment Available at this time",
-                })
-            }
-    } catch (error) {
-        console.log(error);
-        res.status(500).send({
-            success:false,
-            message: "Error while checking booking availability",
-            error
-        })
+
+const bookingHospitalAvailabilityController = async (req, res) => {
+  try {
+    const date = req.body.date;
+    var time = req.body.time;
+    time = time.split(":");
+    time = parseInt(time[0]);
+    const hospitalId = req.body.hospitalId;
+    const hospital = await hospitalModel.findOne({ _id: hospitalId });
+
+    var fromTime = hospital.timing_start;
+    fromTime = fromTime.split(":");
+    fromTime = parseInt(fromTime[0]);
+  
+    var toTime = hospital.timing_end;
+    toTime = toTime.split(":");
+    toTime = parseInt(toTime[0]);
+
+    if (time < fromTime || time > toTime) {
+      return res.status(200).send({
+        success: true,
+        isAppointAvailable: false,
+        message: "Please Pick the time within the hospital's timing",
+      });
     }
-}
+    const appointments = await hospitalAppointmentModel.find({ hospitalId: hospitalId, date: date });
+    let isAppointmentAvailable = true;
+    appointments.forEach((appointment) => {
+      var appointmentTime = appointment.time;
+      appointmentTime = appointmentTime.split(":");
+      appointmentTime = parseInt(appointmentTime[0]);
+      if (appointmentTime === time) {
+        isAppointmentAvailable = false;
+      }
+    });
+
+    if (isAppointmentAvailable) {
+      return res.status(200).send({
+        success: true,
+        isAppointAvailable: true,
+        message: 'Appointment Available at this time',
+      });
+    } else {
+      return res.status(200).send({
+        success: true,
+        isAppointAvailable: false,
+        message: "Appointment Not Available at this time",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error while checking booking availability',
+      error,
+    });
+  }
+};
 
 
 const userAppointmentsController = async(req, res) => {

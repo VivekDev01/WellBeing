@@ -9,7 +9,7 @@ export default async(req, res, next) =>{
         jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
         if(err){
             console.log(err)
-            return res.status(200).send({
+            return res.status(401).send({
                 message:"Authorization Failed1",
                 success: false
             })

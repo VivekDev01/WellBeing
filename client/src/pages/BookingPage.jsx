@@ -84,7 +84,7 @@ const BookingPage = () => {
         }
       );
       if (res.data.success) {
-        setIsAvailable(true);
+        setIsAvailable(res.data.isAppointAvailable);
         message.success(res.data.message);
       } else {
         message.error(res.data.message);
@@ -122,6 +122,7 @@ const BookingPage = () => {
                     aria-required="true"
                     className="m-2"
                     onChange={(value) => {
+                      setIsAvailable(false);
                       setDate(value ? value.format("DD-MM-YYYY") : null);
                     }}
                     allowClear
@@ -131,6 +132,7 @@ const BookingPage = () => {
                     type="time"
                     className="m-2"
                     onChange={(value) => {
+                      setIsAvailable(false);
                       setTime(value ? value.format("HH:mm") : null);
                     }}
                   />
@@ -142,14 +144,14 @@ const BookingPage = () => {
                     Check Availability
                   </button>
 
-                  {/* {isAvailable && ( */}
+                  {isAvailable && (
                   <button
                     className="btn btn-success m-2"
                     onClick={handleBooking}
                   >
                     Book Now
                   </button>
-                  {/* )} */}
+                  )}
                 </div>
               </div>
             )}

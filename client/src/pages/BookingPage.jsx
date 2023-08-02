@@ -10,6 +10,7 @@ import { showLoading, hideLoading } from "../redux/features/alertSlice";
 const BookingPage = () => {
   const { user } = useSelector((state) => state.user);
   const params = useParams();
+  const [userInfo, setUserInfo] = useState([]);
   const [doctors, setDoctors] = useState([]);
   const [date, setDate] = useState(moment());
   const [time, setTime] = useState(moment());
@@ -18,6 +19,25 @@ const BookingPage = () => {
 
   // login user data
   const getUserData = async () => {
+    try {
+      const res = await axios.post(
+        "/api/v1/user/getUserData",
+        { userId: user._id },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      if (res.data.success) {
+        setUserInfo(res.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getDoctorData = async () => {
     try {
       const res = await axios.post(
         "/api/v1/doctor/getDoctorById",
@@ -49,7 +69,7 @@ const BookingPage = () => {
           userId: user._id,
           doctorInfo: doctors,
           date: moment(date, "DD-MM-YYYY").format("DD-MM-YYYY"),
-          userInfo: user,
+          userInfo: userInfo,
           time: moment(time, "HH:mm").format("HH:mm"),
         },
         {
@@ -96,6 +116,7 @@ const BookingPage = () => {
 
   useEffect(() => {
     getUserData();
+    getDoctorData();
   }, []);
 
   return (

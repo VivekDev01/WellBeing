@@ -100,7 +100,7 @@ const HomePage = () => {
         <div className="container mb-5 mt-5">
           <header className="ribbon-container">
             <h2 className="ribbon">
-              <a className="ribbon-content">List of Doctors</a>
+              <a className="ribbon-content">Featured Doctors</a>
             </h2>
           </header>
           <div className="row mt-3">
@@ -114,11 +114,12 @@ const HomePage = () => {
         </div>
       </section>
 
+
       <section id="Hospitals-list">
         <div className="container mb-5 mt-5">
           <header className="ribbon-container">
             <h2 className="ribbon">
-              <a className="ribbon-content">List of Hospitals</a>
+              <a className="ribbon-content">Featured Hospitals</a>
             </h2>
           </header>
           <div className="row mt-3">

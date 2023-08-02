@@ -12,12 +12,34 @@ const BookingPage = () => {
   const params = useParams();
   const [hospitals, setHospitals] = useState([]);
   const [date, setDate] = useState(moment());
+  const [userInfo, setUserInfo] = useState([]);
   const [time, setTime] = useState(moment());
   const [isAvailable, setIsAvailable] = useState(false);
   const dispatch = useDispatch();
 
   // login user data
   const getUserData = async () => {
+    try {
+      const res = await axios.post(
+        "/api/v1/user/getUserData",
+        { userId: user._id },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      if (res.data.success) {
+        setUserInfo(res.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
+  const getHospitalData = async () => {
     try {
       const res = await axios.post(
         "/api/v1/hospital/getHospitalById",
@@ -49,7 +71,7 @@ const BookingPage = () => {
           userId: user._id,
           hospitalInfo: hospitals,
           date: moment(date, "DD-MM-YYYY").format("DD-MM-YYYY"),
-          userInfo: user,
+          userInfo: userInfo,
           time: moment(time, "HH:mm").format("HH:mm"),
         },
         {
@@ -96,6 +118,7 @@ const BookingPage = () => {
 
   useEffect(() => {
     getUserData();
+    getHospitalData();
   }, []);
 
   return (

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Layout from "../../componenets/Layout";
 import axios from "axios";
 import { Table, message } from "antd";
-import moment from "moment";
 
 const HospitalAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -49,37 +48,21 @@ const HospitalAppointments = () => {
 
   const columns = [
     {
+      title:'Patient',
+      render:(record)=> `${record.userInfo.name}`
+    },
+    {
       title: "ID",
       dataIndex: "_id",
     },
     {
-        title:'Name',
-        dataIndex:'name',
-        render:(text,record)=>(
-            <span>
-                {record.hospitalId.name}
-            </span>
-        )
-    },
-    {
-        title:'Phone',
-        dataIndex:'phone',
-        render:(text,record)=>(
-            <span>
-                {record.hospitalId.phone}
-            </span>
-        )
-    },
-    {
-      title: "Date & Time",
+      title: "Appointment Date",
       dataIndex: "date",
-      render: (text, record) => (
-        <span>
-          {moment(record.date, "DD-MM-YYYY").format("DD-MM-YYYY")} &nbsp;
-          {moment(record.time, "HH:mm").format("HH:mm")}
-        </span>
-      ),
     },
+    {
+      title: "Appointment Time",
+      dataIndex: "time",
+    },   
     {
       title: "Status",
       dataIndex: "status",

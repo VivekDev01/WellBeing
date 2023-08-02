@@ -423,13 +423,13 @@ const bookingHospitalAvailabilityController = async (req, res) => {
 
 const userAppointmentsController = async(req, res) => {
     try {
-        const appointments= await appointmentModel.find({userId: req.body.userId})
-        const hospitalAppointments= await hospitalAppointmentModel.find({userId: req.body.userId})
-        const mergedAppointments = [...appointments, ...hospitalAppointments];
+        const DoctorAppointments= await appointmentModel.find({userId: req.body.userId})
+        const HospitalAppointments= await hospitalAppointmentModel.find({userId: req.body.userId})
         res.status(200).send({
             success:true,
             message: "User Appointments fetched Successfully",
-            data: mergedAppointments
+            DoctorAppointments,
+            HospitalAppointments
         })
     } catch (error) {
         console.log(error);

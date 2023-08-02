@@ -5,7 +5,8 @@ import { Table } from "antd";
 import moment from "moment";
 
 const Appointments = () => {
-  const [appointments, setAppointments] = useState([]);
+  const [DoctorAppointments, setDoctorAppointments] = useState([]);
+  const [HospitalAppointments, setHospitalAppointments] = useState([]);
 
   const getAppointments = async () => {
     try {
@@ -15,7 +16,8 @@ const Appointments = () => {
         },
       });
       if (res.data.success) {
-        setAppointments(res.data.data);
+        setDoctorAppointments(res.data.DoctorAppointments);
+        setHospitalAppointments(res.data.HospitalAppointments);
       }
     } catch (error) {
       console.log(error);
@@ -27,20 +29,22 @@ const Appointments = () => {
   }, []);
 
 
-  const columns = [
+  const DoctorAppointmentColumns = [
     {
-        title:'ID',
-        dataIndex:'_id',
+     title:'Doctor',
+     render: (record) => `${record.doctorInfo.firstName} ${record.doctorInfo.lastName}`,
+    },
+    {
+      title:'Appointment ID',
+      dataIndex:'_id',
     },
    {
-    title:'Date & Time',
+    title:'Date',
     dataIndex:'date',
-    render:(text,record)=>(
-        <span>
-            {moment(record.date).format('DD-MM-YYYY')} &nbsp;
-            {moment(record.time).format('HH:mm')}
-        </span>
-    )
+   },
+   {
+    title:'Time',
+    dataIndex:'time',
    },
    {
     title:'Status',
@@ -48,10 +52,35 @@ const Appointments = () => {
    }
   ]
 
+  const HospitalAppointmentColumns = [
+    {
+     title:'Hospital',
+     render: (record) => `${record.hospitalInfo.name}`,
+    },
+    {
+      title:'Appointment ID',
+      dataIndex:'_id',
+    },
+   {
+    title:'Date',
+    dataIndex:'date',
+   },
+   {
+    title:'Time',
+    dataIndex:'time',
+   },
+   {
+    title:'Status',
+    dataIndex:'status',
+   }
+  ]
+
+
   return (
     <Layout>
       <h1>Appointments List</h1>
-        <Table dataSource={appointments} columns={columns} />
+        <Table dataSource={DoctorAppointments} columns={DoctorAppointmentColumns} />
+        <Table dataSource={HospitalAppointments} columns={HospitalAppointmentColumns} />
     </Layout>
   );
 };

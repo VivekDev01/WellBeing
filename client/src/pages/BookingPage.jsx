@@ -125,13 +125,13 @@ const BookingPage = () => {
 
       <section id="booking-page">
         <div className="container">
-          <h3 className="text-center">BookingPage</h3>
+          <h2 className="text-center">Booking Page</h2>
           <div className="container m-5">
             {doctors && (
               <div>
-                <h4>
+                <h3>
                   Dr. {doctors.firstName} {doctors.lastName}
-                </h4>
+                </h3>
                 <h4>Fees: {doctors.feesPerConsultation}</h4>
                 <h4>
                   Timing:{" "}

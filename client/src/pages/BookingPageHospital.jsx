@@ -126,19 +126,19 @@ const BookingPage = () => {
       <div className="container">
       <section id="booking-page">
         <div className="container">
-          <h3 className="text-center">BookingPage</h3>
+          <h2 className="text-center">Booking Page</h2>
           <div className="container m-5">
             {hospitals && (
               <div>
-                <h4>
-                  Dr. {hospitals.name}
-                </h4>
-                <h4>Fees: {hospitals.feesPerConsultation}</h4>
-                <h4>
+                <h3>
+                  {hospitals.name}
+                </h3>
+                <h5>Specializations : {hospitals.specialization}</h5>
+                <h5>
                   Timing:{" "}
                   {moment(hospitals.timing_start, "HH:mm").format("HH:mm")} -{" "}
                   {moment(hospitals.timing_end, "HH:mm").format("HH:mm")}
-                </h4>
+                </h5>
 
                 <div className="d-dlex flex-column w-50">
                   <DatePicker

@@ -15,7 +15,6 @@ const Layout = ({ children }) => {
   const Navigate = useNavigate();
 
   const [showSidebar, setShowSidebar] = useState(false);
-  const [visible, setVisible] = useState(true);
   const [showScrollButton, setShowScrollButton] = useState(false);
   const headerRef = useRef(null);
 
@@ -106,23 +105,6 @@ const Layout = ({ children }) => {
     : user.isHospital
     ? hospitalMenu
     : userMenu;
-
-  const [email, setEmail] = useState("");
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    // Perform any necessary validation on the email input
-
-    // Clear the input field
-    setEmail("");
-
-    // Display a success message
-    message.success("Subscribed successfully!");
-  };
 
   return (
     <>
@@ -242,13 +224,6 @@ const Layout = ({ children }) => {
                 </label>
               </div>
               <ul>
-                <li>
-                  <a href="#">
-                    <i className="fas fa-qrcode" />
-                    Dashboard
-                  </a>
-                </li>
-
                 {sidebarMenu &&
                   sidebarMenu.map((menu) => {
                     const isActive = location.pathname === menu.path;
@@ -278,17 +253,16 @@ const Layout = ({ children }) => {
               <div className="media_icons">
                 <a
                   href="https://www.facebook.com/vivekdev.shah/"
-                  target="_blank"
                 >
                   <i className="fab fa-facebook-f" />
                 </a>
-                <a href="https://twitter.com/Vivek_Dev01/" target="_blank">
+                <a href="https://twitter.com/Vivek_Dev01/">
                   <i className="fab fa-twitter" />
                 </a>
-                <a href="https://instagram.com/vivek_dev01" target="_blank">
+                <a href="https://instagram.com/vivek_dev01">
                   <i className="fab fa-instagram" />
                 </a>
-                <a href="https://youtube.com/@vivekdevshah" target="_blank">
+                <a href="https://youtube.com/@vivekdevshah">
                   <i className="fab fa-youtube" />
                 </a>
               </div>
@@ -341,25 +315,21 @@ const Layout = ({ children }) => {
                 <div className="footer-social-icon">
                       <a
                         href="https://www.facebook.com/vivekdev.shah/"
-                        target="_blank"
                       >
                         <i className="fab fa-facebook-f" />
                       </a>
                       <a
                         href="https://twitter.com/Vivek_Dev01/"
-                        target="_blank"
                       >
                         <i className="fab fa-twitter" />
                       </a>
                       <a
                         href="https://instagram.com/vivek_dev01"
-                        target="_blank"
                       >
                         <i className="fab fa-instagram instagram-bg" />
                       </a>
                       <a
                         href="https://youtube.com/@vivekdevshah"
-                        target="_blank"
                       >
                         <i className="fab fa-youtube" />
                       </a>

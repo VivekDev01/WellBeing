@@ -58,7 +58,7 @@ const BookingPage = () => {
 
   const handleBooking = async () => {
     try {
-      if (!date || !time) {
+      if (date===null || time===null) {
         return alert("Please select date and time");
       }
       dispatch(showLoading());
@@ -118,6 +118,7 @@ const BookingPage = () => {
     getUserData();
     getDoctorData();
   }, []);
+  
 
   return (
     <Layout>
@@ -153,6 +154,7 @@ const BookingPage = () => {
 
                   <TimePicker
                     type="time"
+                    defaultValue={time}
                     className="m-2"
                     onChange={(value) => {
                       setIsAvailable(false);

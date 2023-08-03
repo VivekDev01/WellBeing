@@ -289,7 +289,7 @@ const bookAppointmentController = async (req, res) => {
       toTime = toTime.split(":");
       toTime = parseInt(toTime[0]);
   
-      if (time < fromTime || time > toTime) {
+      if (time < fromTime || time >= toTime) {
         return res.status(200).send({
           success: true,
           isAppointAvailable: false,

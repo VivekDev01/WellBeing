@@ -154,6 +154,7 @@ const BookingPage = () => {
 
                   <TimePicker
                     type="time"
+                    defaultValue={time}
                     className="m-2"
                     onChange={(value) => {
                       setIsAvailable(false);

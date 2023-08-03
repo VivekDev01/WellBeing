@@ -134,11 +134,26 @@ body{
   width: 300px;
   background: #ecf0f3;
   padding: 12px;
-  box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1, inset -3px -3px 7px #ffffff, inset 3px 3px 5px #ceced1;
+  box-shadow: #0a0a0c 0px 0px 10px 0px;
   transition: all 0.3s ease;
   z-index: 10;
 }
 
+/* @media (max-width: 767px) {
+  .side_bar {
+    width: 100px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .side_bar {
+    width: 200px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1365px) {
+  .side_bar {
+    width: 250px;
+  }
+} */
 
 .sidebar.active{
   float: left;
@@ -400,87 +415,7 @@ color: #eeff00 ;
 }
 
 
-/* ============================================================================================================================================================================== */
 
-/* 
-.header{
-    height: 8vh;
-    margin: 20px;
-    box-shadow: 0 0 2px gray;
-    background-color:  rgb(253, 253, 253);
-    border-radius: 5px;
-
-}
-
-
-.content{
-    width: 100%;
-    height: 100%;
-}
-
-
-
-.body{
-    margin-bottom: 20px;
-    box-shadow: 0 0 2px gray;
-    background-color:  rgb(253, 253, 253);
-    border-radius: 5px;
-}
-
-.logo h6{
-    font-size: 1.5rem;
-    text-align: center;
-    margin: 20px 0;
-}
-
-.menu{
-    margin-top: 50px;
-}
-
-.menu-item{
-    margin-top: 30px;
-}
-
-.menu-item a{
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    font-size: 1.2rem;
-}
-
-.menu-item i{
-    font-size: 1.2rem;
-    margin: 0 15px;
-}
-
-.active{
-    background-color: rgba(212, 201, 201, 0.664);
-    padding: 10px;
-}
-
-.active a, .active i{
-    color: rgb(0, 0, 0);
-}
-
-.header-content{
-    display: flex;
-    align-items: center;
-    height: 50px;
-    justify-content: flex-end;
-    margin: 0 15px;
-}
-
-.header-content i{
-    margin-right: 20px;
-    font-size: 1.2rem;
-}
-
-.header-content a{
-    font-size: 1.2rem;
-    text-decoration: none;
-    color: blue;
-    margin: 0 10px;
-    text-transform: uppercase;
-} */
 
 
 .scroll-to-top {
@@ -504,6 +439,11 @@ color: #eeff00 ;
 .my-side-bar{
   cursor: pointer;
   position: fixed;
-  top: 30%;
+  top: 50%;
   left: 1%;
+  z-index: 12222;
+}
+
+.my-side-bar img{
+  width: 20px
 }

@@ -4,9 +4,9 @@ import { adminMenu, userMenu } from "../Data/data";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { message, Badge } from "antd";
-import logo from "../images/logo-wellbeing.png";
 import logo2 from "../images/logo-wellbeing2.png";
 import rocket from "../images/rocket.png";
+import barImg from "../images/right-arrow.png";
 
 const Layout = ({ children }) => {
   const year = new Date().getFullYear();
@@ -43,7 +43,7 @@ const Layout = ({ children }) => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+}, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -297,8 +297,7 @@ const Layout = ({ children }) => {
         )}
 
         {/* Main Content */}
-        <main style={{ marginTop: visible ? "50px" : 0 }}>
-          {/* Main content */}
+        <main>
           <div className="children-area">
             {children}
           </div>
@@ -383,7 +382,7 @@ const Layout = ({ children }) => {
         <div className="my-side-bar">
           <input type="checkbox" onClick={toggleSidebar} id="check" />
           <label className="button bars" htmlFor="check">
-            <i className="fas fa-bars" />
+            <img src={barImg} alt="" />
           </label>
         </div>
 

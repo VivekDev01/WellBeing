@@ -7,7 +7,9 @@
   "scripts": {
     "build": "cd server && npm install  && cd ../client && npm install && npm run build",
     "start": "nodemon server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:frontend": "cd client && npm start",
+    "start:both": "concurrently \"npm run start:frontend\" \"npm run start\""
   },
   "author": "Vivek Dev Shah",
   "license": "ISC",
